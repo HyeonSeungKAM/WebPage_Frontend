@@ -13,6 +13,7 @@
             grid-template-columns: 1fr 1fr 1fr;
             grid-auto-rows: minmax(250px, auto);
             margin: 0px auto;
+
         }
 
         .box {
@@ -20,9 +21,22 @@
             margin:5px;
         }
 
+        .cover_image {
+            position:relative;
+        }
+
+        .cover_image_text{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            color:white;
+        }
+
         a {
             text-decoration: none;
             color:#111111;
+
         }
 
         a:hover .box {
@@ -36,8 +50,13 @@
     <div class="container">
         <a href="#">
             <div class="box">
-                <img src="images/ground.jpg" style="width:100%; height:160px";>
-                흙<br />
+                <div class="cover_image">
+                    <img src="images/ground.jpg" style="width:100%; height:160px";>
+                
+                    <label class="cover_image_text">흙</label>
+                </div>
+                
+
             </div>
         </a>
         
