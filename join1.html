@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입1</title>
+    <style>
+        /* .container => class=container */
+        .container {
+            display:block; /* 가로 높이 설정되고 한줄 내림 */
+            width:600px; /*가로 크기 설정*/
+            border: 2px solid #cccccc; /* 테두리 설정 */
+            padding: 10px; /*안쪽 여백*/
+            margin: 10px auto 0px auto; /*바깥 여백을 이용한 중앙 정렬*/
+        }
+        
+        /* .text => class="text" */
+        .text {
+            display: inline-block; /* 가로 높이 설정되고 가로로 배치*/
+            width: 100px;
+            text-align: left;
+        }
+
+        /* .margin => class="margin" */
+        .margin {
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h3>회원가입1</h3>
+        </div>
+        
+        <hr />
+
+        <div class="margin">
+            <label class="text">아이디</label>
+            <input type="text" placeholder="아이디" autofocus/>
+        </div>
+        
+        <div class="margin">
+            <label class="text">암호</label>
+            <input type="password" placeholder="암호"/>
+        </div>
+
+        <div class="margin">
+            <label class="text">나이</label>
+            <input type="number" placeholder="나이"/>
+        </div>
+        
+        <div class="margin">
+            <label class="text">성별</label>
+            <input type="radio" name="gender" checked/>남
+            <input type="radio" name="gender"/>여
+        </div>
+
+        <div class="margin">
+            <label class="text">이메일</label>
+            <input type="text"/>
+            <label>@</label>
+            <select>
+                <option>naver.com</option>
+                <option>gmail.com</option>
+            </select>
+
+        </div>
+
+        <div class="margin">
+            <label class="text">관심분야</label>
+            <input type="checkbox"/>html
+            <input type="checkbox"/>css
+            <input type="checkbox"/>javascript
+            <input type="checkbox"/>vue
+        </div>
+
+        <div class="margin">
+            <label class="text">자기소개</label>
+            <textarea rows="6" placeholder="자기소개" style= "resize: none;"></textarea>
+        </div>
+
+        <div class="margin">
+            <label class="text">이미지</label>
+            <input type="file"></textarea>
+        </div>
+
+        <div class="margin">
+            <label class="text">생년월일</label>
+            <input type="date"/>
+        </div>
+
+        <hr />
+
+        <div style="margin-top: 20px; text-align: center;">
+            <button>회원가입</button>
+            <a href="home.html"><button>홈으로</button></a>
+
+        </div>
+
+
+    </div>
+
+</body>
+</html>
