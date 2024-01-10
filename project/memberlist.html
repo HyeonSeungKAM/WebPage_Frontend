@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원목록</title>
+
+    <!--스타일 정의-->
     <style>
+
+         /* 전체 프레임 디자인 */
         .container{
             width   :   800px;
             padding :   20px;
@@ -12,16 +16,19 @@
             margin  :   0 auto; /*0 auto 0 auto*/
         }
 
+        /* table태그 디자인 */
         table {
             width   :   100%;
             border-collapse: collapse;
         }
 
+        /* ul태그 스타일 */
         ul {
             list-style: none;
             padding:0px;
         }
 
+        /* li태그 스타일 */
         li {
             display: inline-block;
         }
@@ -32,6 +39,7 @@
 </head>
 
 <body>
+    <!--전체 프레임-->
     <div class="container">
         <h3>회원목록</h3>
         <hr />
@@ -44,6 +52,8 @@
         
         <!--테이블-->
         <table border="1">
+
+            <!--테이블 컬럼 이름-->
             <thead>
                 <tr>
                     <th>아이디</th>
@@ -54,6 +64,7 @@
                 </tr>
             </thead>
 
+             <!--테이블 body(테이블 아이템)-->
             <tbody>
                 <tr>
                     <td>aaa1</td>
@@ -91,8 +102,6 @@
                     <td>2024-01-08</td>
                 </tr>
             </tbody>
-
-
         </table>
         
         <!--페이지 수-->
