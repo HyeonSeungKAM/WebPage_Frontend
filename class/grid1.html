@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>그리드(grid)</title>
+    <title>쇼핑몰</title>
     
     <!--스타일 정의-->
     <style>
@@ -21,12 +21,12 @@
             display :   grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-auto-rows: minmax(250px, auto);
-            margin: 0px auto;
+            margin: 0px auto 10px;
 
         }
 
-        .btn_cont{
-            
+        .btn_div{
+            text-align: center;
         }
 
         .box {
@@ -92,18 +92,15 @@
             <div class="box">5</div>
             
             <!--박스6-->
-            <div class="box">6</div>
-
-            
+            <div class="box">6</div>      
         </div>
 
         <!--버튼-->
-        <div style="text-align: center;">
+        <div class="btn_div">
             <a href="boardlist.html"><button>목록으로</button></a>
-            <a href="boardedit.html"><button>수정</button></a>
-            <a href="boarddelete.html"><button>삭제</button></a>
-            <a href="boardcontent.html"><button>이전글</button></a>
-            <a href="boardcontent.html"></a><button>다음글</button></a>
+            <a href="#"><button>수정</button></a>
+            <a href="#"><button>삭제</button></a>
+            <a href="home.html"><button>홈으로</button></a>
         </div>
     </div>
 </body>
