@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 작성</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 30px auto;
+            border: 1px solid #cccccc;
+            padding: 20px;
+        }
+
+        .dmargin {
+            margin-bottom: 15px;
+        }
+
+        .text {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h3>글쓰기</h3>   
+        </div>
+
+        <div class="dmargin">
+            <hr />
+        </div>
+        
+        <div class="dmargin">
+            <label class="text">작성자</label>
+            <input type="text"/>   
+        </div>
+
+        <div class="dmargin">
+            <label class="text">내용</label>
+            <textarea rows="6" style="resize: none;"></textarea>
+        </div>
+
+        <div class="dmargin">
+            <label class="text">작성자</label>
+            <input type="text"/>   
+        </div>
+
+        <div class="dmargin">
+            <input type="submit" value="글쓰기"/>
+            <button>목록</button>
+               
+        </div>
+
+    </div>    
+</body>
+</html>
