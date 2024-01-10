@@ -4,8 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 상세</title>
+
+    <!--스타일-->
+    <style>
+        
+        /*전체 프레임 스타일*/
+        .container{
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /*테이블 스타일*/
+        table {
+            width: 100%;
+            border-collapse:collapse;
+            border:1px solid #444444;
+        }
+
+        th,td {
+            border:1px solid #444444;
+        }
+    </style>
+
 </head>
 <body>
-    테스트
+    <!-- 전체 프레임 -->
+    <div class="container">
+        <!--테이블 프레임-->
+        <div style="margin-bottom: 10px;">
+            <table>
+                <tbody>
+                    <tr>
+                        <!--첫번재 행의 처음 칸 크기 설정 => 해당 칸의 열 크기 고정됨 -->
+                        <th width="100px;">번호</th>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td>제목1</td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
+                        <td>rtrtr</td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td>작성자</td>
+                    </tr>
+                    <tr>
+                        <th>조회수</th>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>날짜</th>
+                        <td>2023-12-20T01:36:01.845Z</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--버튼-->
+        <div>
+            <a href="boardlist.html"><button>목록으로</button></a>
+            <a href="boardedit.html"><button>수정</button></a>
+            <a href="boarddelete.html"><button>삭제</button></a>
+            <a href="boardcontent.html"><button>이전글</button></a>
+            <a href="boardcontent.html"></a><button>다음글</button></a>
+        </div>
+    </div>
+
 </body>
 </html>
