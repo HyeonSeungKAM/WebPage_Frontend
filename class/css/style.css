@@ -1,0 +1,31 @@
+ /*전체 프레임 스타일*/
+ .container{
+    border: 3px solid #09ff00; 
+    width:800px; 
+    padding: 20px; 
+    margin:0 auto;
+}
+
+.margin{
+    margin-bottom:5px;
+}
+
+.text{
+    width: 130px; 
+    display: inline-block;
+}
+
+ /*버튼 프레임 스타일*/
+ .btn_con{
+    width: 100%; display: inline-block;
+    margin-left:10px;
+}
+
+label {
+    display: inline-block; /* 가로 높이 설정되고 가로로 배치*/
+    width: 120px;
+}
+
+div {
+    margin-bottom: 15px;
+}

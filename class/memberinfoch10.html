@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보변경</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+
+    <!--스타일 정의-->
+    <style>
+        .page_container {
+            width:700px;
+            padding:20px;
+            margin:30px auto;
+        }
+
+        .margin_bm10 {
+            margin-bottom:10px;
+        }
+    </style>
+
+</head>
+<body>
+     <!--전체 프레임-->
+    <div class="page_container shadow rounded border border-success">
+
+        <!--페이지 제목, 로고 및 구분선-->    
+        <div>
+            <img src="images/tree.jpg" style="width:80px; height:50px;"/>
+            <h3 style="display: inline-block;">회원정보변경</h3>
+            <hr />
+        </div>
+        
+        <!--form태그로 입력란과 버튼들을 감싸줌 => join10action.html로 입력한 정보 등이 이동-->
+        <form action="join10action.html" method="post">
+                
+                <!--이름 입력란-->
+                <div class="row g-3 align-items-center margin_bm10">
+                    <div class="col-auto">
+                        <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                        <label for="name" style="width:80px;"class="col-form-label">이름</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="age" class="form-control" placeholder="이름"/>
+                    </div>
+                </div>
+
+
+                <!--이메일 입력란-->
+                <div class="row g-3 align-items-center margin_bm10">
+                    <div class="col-auto">
+                        <label for="email" class="text" style="width:80px;">이메일</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="email" class="form-control" placeholder="이메일"/>
+                    </div>
+                    <div class="col-auto">
+                        <label class="text">@</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>naver.com</option>
+                            <option>gmail.com</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--나이 입력란-->
+                <div class="row g-3 align-items-center margin_bm10">
+                    <div class="col-auto">
+                        <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                        <label for="age" style="width:80px;"class="col-form-label">나이</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="age" class="form-control" placeholder="나이"/>
+                    </div>
+                </div>
+
+                <!--버튼(회원가입, 홈으로)-->
+                <div class="row g-3 align-items-center margin_bm10">
+                    <div class="col-auto" style="margin: 30px auto 0 auto;">
+                        <button class="btn btn-primary">회원가입</button>
+                        <a href="home10.html" class="btn btn-secondary">홈으로</a>
+                    </div>
+                </div>
+        </form>
+
+
+    </div>
+
+</body>
+</html>
