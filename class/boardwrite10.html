@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 작성10</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+
+    <!--스타일 정의-->
+    <style>
+        .board_container {
+            width: 500px;
+            padding: 20px;
+            margin: 30px auto 0px auto;
+        }
+
+        .margin20 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!--전체 프레임-->
+    <div class="shadow board_container">
+        <!--페이지 제목-->
+            <h3>글쓰기</h3>
+            <hr/>
+
+        <!--제목-->
+        <div class="row g-3 align-items-center margin20">
+            <div class="col-auto">
+                <label for="title" style="width:80px;" class="col-form-label">제목</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="title" class="form-control"/>  
+            </div>
+        </div>
+
+
+         <!--내용-->
+         <div class="row g-3 align-items-start margin20">
+            <div class="col-auto">
+                <label for="content" style="width:80px;" class="col-form-label">내용</label>
+            </div>
+            <div class="col-auto">
+                <textarea id="content" rows="6" class="form-control" style="width: 300px;"></textarea>
+            </div>
+        </div>
+
+        <!--작성자-->
+        <div class="row g-3 align-items-center margin20">
+            <div class="col-auto">
+                <label for="writer2" style="width:80px;" class="col-form-label">작성자</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="writer2" class="form-control"/>  
+            </div>
+        </div>
+
+        
+        <!--버튼 구성-->
+        <div class="row g-3 align-items-center margin20">
+                <div class="col-auto" style="margin: 30px auto 0 auto;">
+                    <button class="btn btn-primary">글쓰기</button>
+                <a href="board10.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>   
+
+</body>
+</html>

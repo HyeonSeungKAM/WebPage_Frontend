@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판10</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <style>
+        .board_container {
+            width: 900px;
+            padding:20px;
+            margin: 0px auto 0px auto;
+        }
+
+        .margin{
+            margin-bottom:20px;
+        }
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div  class="board_container shadow">
+        
+        <!--페이지 제목-->
+        <div class="margin">
+            <h3>게시판10</h3>
+        </div>
+        
+        <!--버튼 및 검색란-->
+        <div class="row g-3 d-flex justify-content-between margin">
+            <div class="col-auto">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="home10.html"><button type="button" class="btn btn-danger">홈으로</button></a>
+                    <a href="boardwrite10.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
+                </div>
+            </div>
+
+            <div class="col-auto">
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <input type="text" id="id" class="form-control" placeholder="검색어" />
+                    </div>                            
+                    <div class="col-auto">                     
+                        <button class="btn btn-primary">검색</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- 목록 -->
+        <div class="margin">
+            <table class="table table-striped" style="text-align:center;">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>조회수</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="boardcontent10.html?no=1">제목1</a></td>
+                        <td>가나다</td>
+                        <td>11</td>
+                        <td>2024-01-12</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="boardcontent10.html?no=2">제목2</a></td>
+                        <td>가나다2</td>
+                        <td>12</td>
+                        <td>2024-01-12</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="boardcontent10.html?no=3">제목3</a></td>
+                        <td>가나다3</td>
+                        <td>13</td>
+                        <td>2024-01-12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!--페이지네이션-->
+        <div class="row justify-content-center g-3 margin">
+            <div class="col-auto">
+                <ul class="pagination">
+                    <!-- "<<" 버튼 -->
+                    <!-- <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li> -->
+
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    
+                    <!-- ">>" 버튼  -->
+                    <!-- <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li> -->
+                  </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

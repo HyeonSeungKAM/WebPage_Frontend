@@ -7,3 +7,11 @@ alt + shift + 화살표 키 : 선택 부분 화살표 키 방향으로 복사됨
 특정영역 선택 + tab + shift : 선택 부분 전체 <- 방향으로 이동
 
 특정영역 선택 + alt + 화살표 키 : 선택 부분 전체 화살표 키 방향으로 이동
+
+특정영역 선택 + ctrl + / : 선택 부분 주석 처리
+
+
+bootstrap 스타일 doc
+ [utility - flex] 
+ - 세로 정렬: Align items 
+ - 가로 정렬: Justify content 

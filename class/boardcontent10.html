@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 상세</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <style>
+        .boardc_container {
+            width:900px;
+            margin:30px auto 0px auto;
+            padding:20px;
+        }
+
+        .margin_bm10 {
+            margin-bottom: 20px;
+        }
+
+        .margin_tp10 {
+            margin-top: 10px auto;
+        }
+
+        .label_con {
+            width:80px;
+        }
+
+        .content_con{
+            width:400px;
+        }
+
+        .button_con{
+            margin: 30px auto 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="shadow boardc_container">
+        
+        <h3>글내용</h3>
+        <hr/>
+
+        <!-- 번호 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">글번호</label>
+            </div>
+            <div class="col-auto">
+                <label class="form-control content_con">11</label>
+            </div>
+        </div>
+        
+        <!-- 제목  -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">제목</label>
+            </div>
+            <div class="col-auto">
+                <label class="form-control content_con">11</label>
+            </div>
+        </div>
+        
+        <!-- 내용 -->
+        <div class="row g-3 align-items-start margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">내용</label>
+            </div>
+            <div class="col-auto">
+                <div class="form-control content_con" style="word-break: break-all;">
+                    내용들...egkljwgkewewgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+                    내용들...
+                </div>
+            </div>
+        </div>
+        
+        <!-- 작성자 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">작성자</label>
+            </div>
+            <div class="col-auto">
+                <label class="form-control content_con">11</label>
+            </div>
+        </div>
+
+        <!-- 조회수 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">조회수</label>
+            </div>
+            <div class="col-auto">
+                <label class="form-control content_con">11</label>
+            </div>
+        </div>
+        
+        <!-- 날짜 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">날짜</label>
+            </div>
+            <div class="col-auto">
+                <label class="form-control content_con">11</label>
+            </div>
+        </div>
+        
+        <!-- 버튼 -->
+        <div class="row g-3 align-items-center margin_tp10">
+            <div class="col-auto button_con" >
+                <a href="board10.html"><button class="btn btn-primary">목록</button></a>
+                <a href="#"><button class="btn btn-primary">글수정</button></a>
+                <a href="#"><button class="btn btn-primary">글삭제</button></a>
+                <a href="#"><button class="btn btn-primary">이전글</button></a>
+                <a href="#"><button class="btn btn-primary">다음글</button></a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
