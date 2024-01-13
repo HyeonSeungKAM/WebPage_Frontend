@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>쇼핑몰</title>
-    
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <!--스타일 정의-->
     <style>
 
-        .container{
-            width: 800px;
-            border  :   1px solid #cccccc;
-            margin: 0 auto;
-            padding: 20px;
+        .board_container {
+            width: 900px;
+            padding:20px;
+            margin: 0px auto 0px auto;
         }
 
         .grid {
@@ -60,7 +59,23 @@
 </head>
 <body>
     <!-- 전체 프레임 -->
-    <div class="container">
+    <div class="board_container shadow">
+
+        <!--페이지 제목-->
+        <div class="margin">
+            <h3>쇼핑몰10</h3>
+        </div>
+
+        <!-- 버튼메뉴 -->
+        <div>
+            <div class="col-auto">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="home10.html"><button type="button" class="btn btn-primary">홈</button></a>
+                    <a href="board10.html"><button type="button" class="btn btn-primary">게시판</button></a>
+                    <a href="#"><button type="button" class="btn btn-primary">게시판</button></a>
+                </div>
+            </div>
+        </div>
         <!--그리드-->
         <div class="grid">
 
@@ -93,14 +108,6 @@
             
             <!--박스6-->
             <div class="box">6</div>      
-        </div>
-
-        <!--버튼-->
-        <div class="btn_div">
-            <a href="board10.html"><button>게시판</button></a>
-            <a href="itemedit10.html"><button>수정</button></a>
-            <a href="itemdelete10"><button>삭제</button></a>
-            <a href="home10.html"><button>홈으로</button></a>
         </div>
     </div>
 </body>
