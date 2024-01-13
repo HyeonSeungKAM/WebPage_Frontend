@@ -1,4 +1,4 @@
-ctrl + shift + f : 자동 정렬 
+alt + shift + f : 자동 정렬 
 
 alt + shift + 화살표 키 : 선택 부분 화살표 키 방향으로 복사됨 
 
