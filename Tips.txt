@@ -15,3 +15,11 @@ bootstrap 스타일 doc
  [utility - flex] 
  - 세로 정렬: Align items 
  - 가로 정렬: Justify content 
+
+
+
+
+
+자바스크립트 
+- <script> </script> </body>
+- console.log('') : 크롬 콘솔(f12)에 출력됨

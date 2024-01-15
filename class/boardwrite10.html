@@ -52,10 +52,10 @@
         <!--작성자-->
         <div class="row g-3 align-items-center margin20">
             <div class="col-auto">
-                <label for="writer2" style="width:80px;" class="col-form-label">작성자</label>
+                <label for="writer" style="width:80px;" class="col-form-label">작성자</label>
             </div>
             <div class="col-auto">
-                <input type="text" id="writer2" class="form-control"/>  
+                <input type="text" id="writer" class="form-control"/>  
             </div>
         </div>
 
@@ -63,13 +63,40 @@
         <!--버튼 구성-->
         <div class="row g-3 align-items-center margin20">
                 <div class="col-auto" style="margin: 30px auto 0 auto;">
-                    <button class="btn btn-primary">글쓰기</button>
+                    <button onclick="boardwriteAction()" class="btn btn-primary">글쓰기</button>
                 <a href="board10.html" class="btn btn-secondary">목록</a>
                 </div>
             </div>
         </div>
         
     </div>   
+    <script>
+
+        // 글쓰기 버튼 함수 정의 
+        function boardwriteAction() {
+
+            //각 항목을 입력하지 않을 경우 경고문 표시
+            if(title.value.length < 1) {
+                alert('제목을 입력해주세요');
+                title.focus();
+                return false;
+            }
+
+            if(content.value.length < 1) {
+                alert('내용을 입력해주세요');
+                content.focus();
+                return false; 
+            }
+            if(writer.value.length < 1) {
+                alert('작성자를 입력해주세요');
+                writer.focus();
+                return false;
+            }
+
+            alert('게시글이 등록되었습니다.')
+        }
+
+    </script>
 
 </body>
 </html>

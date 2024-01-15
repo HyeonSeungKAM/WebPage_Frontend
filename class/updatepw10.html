@@ -41,10 +41,10 @@
             <div class="col-auto">
                 <!--클릭 시 label의 for="id"에 의해
                     "id"로 설정된 요소로 커서가 이동함-->
-                <label for="id" class="p_label col-form-label">아이디</label>
+                <label for="uid" class="p_label col-form-label">아이디</label>
             </div>
             <div class="col-auto">
-                <input type="text" id="id" class="form-control" placeholder="아이디"/>
+                <input type="text" id="uid" class="form-control" placeholder="아이디"/>
             </div>
         </div>
         
@@ -53,20 +53,20 @@
             <div class="col-auto">
                 <!--클릭 시 label의 for="id"에 의해
                     "id"로 설정된 요소로 커서가 이동함-->
-                <label for="password" class="p_label col-form-label">현재 암호</label>
+                <label for="upw1" class="p_label col-form-label">현재 암호</label>
             </div>
             <div class="col-auto">
-                <input type="password" id="password" class="form-control" placeholder="현재 암호"/>
+                <input type="password" id="upw1" class="form-control" placeholder="현재 암호"/>
             </div>
         </div>
 
         <!--현재 암호 확인 입력란-->
         <div class="row g-3 align-items-center margin_bm10">
             <div class="col-auto">
-                <label for="passwordchk" class="p_label col-form-label">현재 암호 확인</label>
+                <label for="upw2" class="p_label col-form-label">현재 암호 확인</label>
             </div>
             <div class="col-auto">
-                <input type="password" id="passwordchk" class="form-control" placeholder="암호확인"/>
+                <input type="password" id="upw2" class="form-control" placeholder="현재 암호 확인"/>
             </div>
         </div>
 
@@ -75,20 +75,33 @@
             <div class="col-auto">
                 <!--클릭 시 label의 for="id"에 의해
                     "id"로 설정된 요소로 커서가 이동함-->
-                <label for="password" class="p_label col-form-label">변경할 암호</label>
+                <label for="chpw" class="p_label col-form-label">변경할 암호</label>
             </div>
             <div class="col-auto">
-                <input type="password" id="password" class="form-control" placeholder="현재 암호"/>
+                <input type="password" id="chpw" class="form-control" placeholder="변경할 암호"/>
             </div>
         </div>
         
         <!--버튼(암호변경, 홈으로)-->
         <div class="row g-3 align-items-center margin_bm10">
             <div class="col-auto" style="margin: 30px auto 0 auto;">
-                <button class="btn btn-primary">암호변경</button>
+                <button onclick="joinAction()" class="btn btn-primary">암호변경</button>
                 <a href="home10.html" class="btn btn-secondary">홈으로</a>
             </div>
         </div>
     </div>
+
+    <script>
+        function joinAction() {
+            if(uid.value.length < 1) {
+                alert('아이디를 입력해주세요');
+                uid.focus();
+                return false;
+            }
+        }
+
+    </script>
+
+
 </body>
 </html>
