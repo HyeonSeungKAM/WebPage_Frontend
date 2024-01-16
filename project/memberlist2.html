@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원목록2</title>
+</head>
+<body>
+    <div>
+        <table style="border: 1px solid #cccccc">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>연락처</th>
+                </tr>
+
+            </thead>
+            <tbody id="tbody" style="text-align: center;">
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+        const tbody = document.getElementById('tbody'); // <== 이 부분은 생략가능
+
+        //1. api서버에서 정보 회원 정보를 받음
+        const memberlist = [
+            {phone:'010-0000-1111', uname:'홍길동1', age:13},
+            {phone:'010-0000-2222', uname:'홍길동2', age:23},
+            {phone:'010-0000-3333', uname:'홍길동3', age:33},
+            {phone:'010-0000-4444', uname:'홍길동4', age:43},
+            {phone:'010-0000-5555', uname:'홍길동5', age:53}
+        ];
+
+        for (let tmp of memberlist) {
+            tbody.innerHTML += `<tr>
+                                <td>${tmp.uname}</td>
+                                <td>${tmp.age}</td>
+                                <td>${tmp.phone}</td></tr>`;
+        }
+
+
+
+    </script>
+</body>
+</html>

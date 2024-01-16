@@ -11,8 +11,13 @@
 </head>
 <body>
     <div>
+        <label>물품명</label>
         <input tpye="text" id="iname" /><br />
+
+        <label>물품가격</label>
         <input tpye="number" id="price" /><br />
+
+        <label>이미지</label>
         <img src="images/noimage.jpg" style="width:100px; height:100px;" id="img" />
         <input type="file" onchange="handleImage(this)" /><br />
 
@@ -33,18 +38,17 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    
     <script>
         function insertAction() {
             if(iname.value.length < 1) {
-                Swal.fire("물품명을 입력하세요.");
+                alert('물품명을 입력하세요.');
                 iname.focus();
                 return false
             }
 
             if(price.value.length < 1) {
-                Swal.fire("가격을 입력하세요.");
+                alert('가격을 입력하세요.');
                 price.focus();
                 return false
             }

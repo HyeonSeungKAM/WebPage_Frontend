@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 자바스크립트</title>
+    <title>Document</title>
 </head>
 <body>
     <div>
@@ -13,22 +13,22 @@
     
     <div>
         <label>암호</label>
-        <input type="password" id="pw" placeholder="암호"  />
+        <input type="password" id="pw" placeholder="암호" autofocus />
     </div>
     
     <div>
         <label>암호확인</label>
-        <input type="password" id="pw1" placeholder="암호확인"  />
+        <input type="password" id="pw1" placeholder="암호확인" autofocus />
     </div>
     
     <div>
         <label>이름</label>
-        <input type="text" id="name1" placeholder="이름"  />
+        <input type="text" id="name1" placeholder="이름" autofocus />
     </div>
     
     <div>
         <label>이메일</label>
-        <input type="text" id="email" placeholder="이메일"  />
+        <input type="text" id="email" placeholder="이메일" autofocus />
         <label>@</label>
         <select id="email1">
             <option value="이메일선택">이메일선택</option>
@@ -40,7 +40,7 @@
 
     <div>
         <label>나이</label>
-        <input type="text" id="age" placeholder="나이" />
+        <input type="text" id="age" placeholder="나이" autofocus />
     </div>
 
     <hr />
@@ -75,57 +75,55 @@
 
         // 아이디 값 길이가 1보다 작을 경우...
         function joinAction() {
-
             if(id.value.length < 1){
-                Swal.fire({title:"아이디?",
-                        text:"아이디를 입력하세요",
-                    didClose:() => {id.focus()}});
-                // alert('아이디를 입력하세요.')
+                Swal.fire("아이디를 입력하세요.");
+                // alert('아이디를 입력하세요.');
+                id.focus();
+                return false; // joinAction함수가 여기서 종료
             }
 
             if(pw.value.length < 1){
-                Swal.fire({title:"암호?",
-                        text:"암호를 입력하세요.", 
-                    didClose:() => {pw.focus()}});
+                Swal.fire("암호를 입력하세요.");
                 // alert('암호를 입력하세요.');
-                
+                pw.focus();
+                return false; // joinAction함수가 여기서 종료
             }
 
 
-            // // === 같다, !== 같지 않음
-            // if(pw1.value !== pw.value) {
-            //     Swal.fire({
-            //         text: "암호와 암호확인이 일치하지 않습니다.",
-            //         });
-            //     // alert('암호와 암호확인이 일치하지 않습니다.');
-            //     pw1.focus();
-            //     return false;
-            // }
+            // === 같다, !== 같지 않음
+            if(pw1.value !== pw.value) {
+                Swal.fire({
+                    text: "암호와 암호확인이 일치하지 않습니다.",
+                    });
+                // alert('암호와 암호확인이 일치하지 않습니다.');
+                pw1.focus();
+                return false;
+            }
 
-            // // id를 name으로 지정 시 오류 생김 (name이라는 명령어가 따로 존재)
-            // if(name1.value.length < 1){
-            //     Swal.fire("이름을 입력하세요.");
-            //     // alert('이름을 입력하세요.');
-            //     name1.focus();
-            //     return false; // joinAction함수가 여기서 종료
-            // }
+            // id를 name으로 지정 시 오류 생김 (name이라는 명령어가 따로 존재)
+            if(name1.value.length < 1){
+                Swal.fire("이름을 입력하세요.");
+                // alert('이름을 입력하세요.');
+                name1.focus();
+                return false; // joinAction함수가 여기서 종료
+            }
 
 
-            // if(email1.value === '이메일선택') {
-            //     Swal.fire("이메일을 선택하세요.");
-            //     // alert('이메일을 선택하세요.');
-            //     email.focus();
-            //     return false;
-            // }
+            if(email1.value === '이메일선택') {
+                Swal.fire("이메일을 선택하세요.");
+                // alert('이메일을 선택하세요.');
+                email.focus();
+                return false;
+            }
 
-            // if(age.value > 150) {
-            //     Swal.fire("나이가 정확하지 않습니다.");
-            //     // alert('나이가 정확하지 않습니다.');
-            //     age.focus();
-            //     return false;
-            // }
+            if(age.value > 150) {
+                Swal.fire("나이가 정확하지 않습니다.");
+                // alert('나이가 정확하지 않습니다.');
+                age.focus();
+                return false;
+            }
         
-            // alert('회원가입이 가능한 시점');
+            alert('회원가입이 가능한 시점');
         }
     </script>
 </body>

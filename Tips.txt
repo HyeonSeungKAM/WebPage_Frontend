@@ -37,3 +37,21 @@ ex)
     console.log(data.name);
     console.log(data.email);
     console.log(data.age);
+
+
+서버에서 배열을 받아서 포함된 값들을 목록으로 모두 출력(반복문 활용):
+- 저장형태: [{obj[0]},{obj[1]},{obj[2]}...{obj[n]}]
+ ex)    
+        const arr = [
+            {code:1, name:'가나다1', price:1201},
+            {code:2, name:'가나다2', price:1202},
+            {code:3, name:'가나다3', price:1203}
+        ];
+        
+        for( let tmp of arr) {
+            console.log(tmp);
+        }
+
+
+https://sweetalert2.github.io/ 
+ - 커스텀 디자인을 한 alert를 사용할 수 있도록 함.

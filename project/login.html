@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인10</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        .page_container {
+            width: 700px;
+            padding: 20px;
+            margin: 30px auto;
+        }
+
+        .margin_bm10 {
+            margin-bottom: 10px;
+        }
+
+        .margin_tp10 {
+            margin-top: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!--전체 프레임-->
+    <div class="page_container shadow rounded border border-success">
+
+        <!--제목 및 구분선-->
+        <div>
+            <img src="images/tree.jpg" style="width:80px; height:50px;" />
+            <h3 style="display: inline-block;">로그인</h3>
+            <hr />
+        </div>
+
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <!--클릭 시 label의 for="id"에 의해
+                        "id"로 설정된 요소로 커서가 이동함-->
+                <label for="uid" style="width:80px;" class="col-form-label">아이디</label>
+            </div>
+            <div class="col-auto">
+                <input style="width:350px;" type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" />
+            </div>
+        </div>
+
+
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <!--클릭 시 label의 for="id"에 의해
+                        "id"로 설정된 요소로 커서가 이동함-->
+                <label for="upw" style="width:80px;" class="col-form-label">암호</label>
+            </div>
+            <div class="col-auto">
+                <input style="width:350px;" type="password" id="upw" class="form-control" placeholder="암호를 입력하세요" />
+            </div>
+        </div>
+
+
+        <div class="row g-3 align-items-center margin_tp10">
+            <div class="col-auto" style="margin: 30px auto 0 auto;">
+                <button class="btn btn-primary" onclick="loginAction()">로그인</button>
+                <a href="home10.html" class="btn btn-secondary">홈으로</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function loginAction() {
+            if (uid.value.length < 1) {
+                Swal.fire(
+                    {
+                        icon: "error",
+                        title: "아이디를 입력해주세요!"
+                    });
+                uid.focus();
+                return false;
+            }
+
+            if (upw.value.length < 1) {
+                Swal.fire(
+                    {
+                        icon: "error",
+                        title: "암호를 입력해주세요!"
+                    });
+                upw.focus()
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "로그인이 되었습니다.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function (result) {
+                window.location.href="home.html" // a태그와 같은 역할을 함.
+            } );
+            
+        }
+    </script>
+
+
+</body>
+
+</html>

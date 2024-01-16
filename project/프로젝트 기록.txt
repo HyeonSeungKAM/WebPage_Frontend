@@ -1,0 +1,10 @@
+숫자가 붙은 다른 파일은 예제...
+
+signout.html: 회원탈퇴 페이지
+udmeminfo: 회원정보변경 페이지
+home: 메인 홈페이지 화면 페이지
+board: 게시판 페이지
+boardcontent: 게시판 상세 페이지
+itemManage: 물품관리 페이지
+itemlist: 물품목록
+uditem: 물품등록

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물품목록2</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div>
+        <div id="div1">
+
+        </div>
+        <hr />
+        <div id="div2">
+
+        </div>
+    </div>
+
+    <script>
+        // 1. api 서버에서 물품정보1개를 받아서 obj 변수에 저장.
+        const obj = {code:1, name:'가나다', price:1200};    
+        console.log(obj);
+        console.log(obj.name);
+        console.log(obj.price);
+        console.log(obj.code);
+
+        
+        // 2. 적절한 위치에 표시
+        //  - div1.innerHTML = '<p>예시</p>';    =>   id=div1인 <div>태그에 <p>예시</p>를 삽입. 
+        //  - 아래 코드는 id=div1인 <div>태그에 obj값들을 <p>태그로 감싸 삽입. 
+        div1.innerHTML = `<p>${obj.code}, ${obj.name}, ${obj.price}</p>`;
+
+
+        // 3. api 서버에서 물품정보 n개를 받음, arr 변수에 저장.
+        // 저장형태: [{obj[0]},{obj[1]},{obj[2]}...{obj[n]}]
+        const arr = [
+            {code:1, name:'가나다1', price:1201},
+            {code:2, name:'가나다2', price:1202},
+            {code:3, name:'가나다3', price:1203}
+        ];
+        
+        for( let tmp of arr) {
+            console.log(tmp);
+            div2.innerHTML += `<p>${tmp.code}, ${tmp.name}, ${tmp.price}</p>`;
+        }
+
+        
+
+
+
+    </script>
+</body>
+</html>
