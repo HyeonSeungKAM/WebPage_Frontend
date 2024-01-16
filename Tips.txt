@@ -20,6 +20,20 @@ bootstrap 스타일 doc
 
 
 
-자바스크립트 
+자바스크립트 - 데이터가 페이지에 정확하게 전송됬는지 확인하는 용도
 - <script> </script> </body>
 - console.log('') : 크롬 콘솔(f12)에 출력됨
+
+ex) 
+    //1. rest ap에서 회원정보를 받았다고 가정함. (object) 
+    // 해당 방식으로 데이터를 전달하는 방식 = JSON
+    
+    let data = {name :'가나다', email:'a@naver.com', age:13};
+        
+    //2. 서버에서 받은 한명의 정보를 출력함.
+    console.log(data); 
+
+    //3. 데이터 값을 각각 출력 
+    console.log(data.name);
+    console.log(data.email);
+    console.log(data.age);
