@@ -1,4 +1,4 @@
-숫자가 붙은 다른 파일은 예제...
+project 폴더에서 숫자가 붙은 다른 파일은 예제...
 
 signout.html: 회원탈퇴 페이지
 udmeminfo: 회원정보변경 페이지
@@ -8,3 +8,17 @@ boardcontent: 게시판 상세 페이지
 itemManage: 물품관리 페이지
 itemlist: 물품목록
 uditem: 물품등록
+
+
+수업 회원가입 
+1. TangSuYuk 1111
+2. Anderson 1111
+
+
+로그인 시 토큰 할당됨.(접속 가능한 시간 제한)
+
+sessionStorage.getItem : 세션 저장소로부터 가져오기
+              .setItem : 세션 저장소에 저장하기
+              .remove : 세션 저장소에서 제거하기
+
+

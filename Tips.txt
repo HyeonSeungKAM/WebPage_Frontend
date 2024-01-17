@@ -17,7 +17,8 @@ bootstrap 스타일 doc
  - 가로 정렬: Justify content 
 
 
-
+파일명 2: javascript 및 sweetalert2 사용한 예제 
+파일명 3: 서버 통신 기능 활용한 예제 (memberlist2.html은 제외)
 
 
 자바스크립트 - 데이터가 페이지에 정확하게 전송됬는지 확인하는 용도
@@ -55,3 +56,21 @@ ex)
 
 https://sweetalert2.github.io/ 
  - 커스텀 디자인을 한 alert를 사용할 수 있도록 함.
+
+ if랑 else if 잘 활용하기
+  - 아래 코드에서 else if가 아닌 if문을 사용할 경우, 두 번째 if문만 실행됨.
+
+  - if(id.value.length < 1){
+                Swal.fire({title:"아이디?",
+                        text:"아이디를 입력하세요",
+                    didClose:() => {id.focus()}});
+                // alert('아이디를 입력하세요.')
+            }
+
+    else if(pw.value.length < 1){
+        Swal.fire({title:"암호?",
+                text:"암호를 입력하세요.", 
+            didClose:() => {pw.focus()}});
+        // alert('암호를 입력하세요.');
+        
+    }

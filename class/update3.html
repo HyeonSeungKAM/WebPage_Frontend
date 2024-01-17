@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정보변경3</title>
+</head>
+<body>
+    <div>
+        <div>
+            <label>이름</label>
+            <input type="text" id="uname" placeholder="이름" autofocus />
+        </div>
+        
+        <div>
+            <label>이메일</label>
+            <input type="text" id="email" placeholder="이메일" autofocus />
+            <label>@</label>
+            <select id="email1">
+                <option value="이메일선택">이메일선택</option>
+                <option value="daum.net">daum.net</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="naver.com">naver.com</option>
+            </select>
+        </div>
+    
+        <div>
+            <label>나이</label>
+            <input type="text" id="age" placeholder="나이" autofocus />
+        </div>
+        <button>정보변경</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        async function memberinfo() {
+            let token = sessionStorage.getItem('token');
+            const url = `http://ihongss.com:13000/api/member/selectone.json`;
+            const headers = {"auth":token, "Content-Type":"application/json"};
+            const {data} = await axios.get(url, {headers});
+            console.log(data)
+        } 
+        
+        memberinfo();
+       
+    </script>
+
+</body>
+</html>

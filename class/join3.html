@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <!-- 키 눌렀다가 때었을 때(onkeyup) 아이디의 중복검사를 함 -->
+        <input type="text" id="id" placeholder="아이디" onkeyup="idcheckAction()" autofocus/><label id="idcheck"></label><br />
+        <input type="password" id="pw" placeholder="암호"/><br />
+        <input type="password" id="pw1" placeholder="암호확인"/><br />
+        <input type="text" id="uname" placeholder="이름"/><br />
+        <input type="number" id="age" placeholder="나이"/><br />
+        <input type="text" id="email1"placeholder="이메일"/><br />
+        <label>@</label>
+        <select id="email2">
+            <option value="gmail.com">gmail.com</option>
+            <option value="naver.com">naver.com</option>
+        </select>
+        <button onclick="joinAction()">회원가입</button>
+        <a href="memberlist2.html"><button>회원목록</button></a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        async function joinAction() {
+            // 유효성검사.. 생략함.
+            const url = `http://ihongss.com:13000/api/member/join.json`;
+            const headers = {"Content-Type":"application/json"};
+            const body = {
+                _id : `${id.value}`,
+                password : `${pw.value}`,
+                email : `${email1.value}@${email2.value}`,
+                age : `${age.value}`,
+                name : `${uname.value}`,
+            }
+
+            const {data} = await axios.post(url, body, {headers});
+            console.log('result =>', data);
+            if (data.status === 200) {
+                alert('회원가입 되었습니다.');
+                window.location.href="memberlist2.html";
+            }
+        }
+
+        // 아이디 중복확인 함수
+        async function idcheckAction() {
+            console.log(id.value);
+            if(id.value.length > 0){
+
+                // 서버에서 아이디는 _id, 웹 페이지에서는 id로 정의함 
+                // url에 ...json?_id=${id.value}를 추가하여 id가 일치하는 것을 찾아냄.
+                const url = `http://ihongss.com:13000/api/member/idcheck.json?_id=${id.value}`;
+                const headers = {"Content-Type":"application/json"};
+                const { data } = await axios.get(url, {headers});
+                console.log('data =>',data);
+                
+                // 같을 경우 result는 1 다를 경우(서버에 없는 경우) reuslt는 0이다.
+                if(data.result === 1) {
+                    idcheck.innerHTML = '사용불가';
+
+                } else if(data.result === 0) {
+                    idcheck.innerHTML = '사용가능';
+                }
+
+
+            } else {
+                idcheck.innerHTML = '중복확인'
+            }
+        }
+    </script>
+</body>
+</html>

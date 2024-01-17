@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="id" placeholder="아이디" autofocus /><br/>
+        <input type="password" id="pw" placeholder="암호" /> <br/>
+        <button onclick="loginAction()">로그인</button>
+        <a href="memberlist2.html"><button>회원목록</button></a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function loginAction() {
+            const url = `http://ihongss.com:13000/api/member/login.json`;
+            const headers = {"Content-Type":"application/json"};
+            const body = {
+                _id : `${id.value}`, 
+                password : `${pw.value}`
+            };
+            const {data} = await axios.post(url, body, {headers});
+            console.log(data);
+
+            if(data.status === 200) {
+                alert('로그인 성공 했습니다.');
+
+                // 로그인 성공 시 세션 저장소(sessionStorage)에 할당된 토큰이 저장됨.
+                sessionStorage.setItem("token", data.token);
+
+                // 주소를 바꾼 다음에 엔터키 누르기
+                window.location.href="memberlist2.html";
+
+            } else {
+                alert('아이디 또는 암호가 틀립니다.')
+            }
+
+        }
+    </script>
+</body>
+</html>
