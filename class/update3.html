@@ -14,7 +14,7 @@
         
         <div>
             <label>이메일</label>
-            <input type="text" id="email" placeholder="이메일" autofocus />
+            <input type="text" id="email" placeholder="이메일" />
             <label>@</label>
             <select id="email1">
                 <option value="이메일선택">이메일선택</option>
@@ -26,24 +26,58 @@
     
         <div>
             <label>나이</label>
-            <input type="text" id="age" placeholder="나이" autofocus />
+            <input type="text" id="age" placeholder="나이" />
         </div>
-        <button>정보변경</button>
+        <button onclick="updateAction()">정보변경</button>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
+        // 이전 정보 불러오기
         async function memberinfo() {
             let token = sessionStorage.getItem('token');
             const url = `http://ihongss.com:13000/api/member/selectone.json`;
             const headers = {"auth":token, "Content-Type":"application/json"};
             const {data} = await axios.get(url, {headers});
-            console.log(data)
+
+            let prev_info = data.result;
+
+            console.log(data);
+            console.log(prev_info);
+            
+            uname.value = prev_info.name;
+
+            email.value = prev_info.email.split('@')[0];
+            email1.value = prev_info.email.split('@')[1];
+
+            age.value = prev_info.age;    
         } 
-        
         memberinfo();
+
+        async function updateAction() {
+            let token = sessionStorage.getItem('token');
+            const url = `http://ihongss.com:13000/api/member/update.json`;
+            const headers = {"auth":token,"Content-Type":"application/json"};
+            const body = {
+                name : `${uname.value}`,
+                email : `${email.value}@${email1.value}`,
+                age : `${age.value}`
+                 
+            };
+            const {data} = await axios.put(url, body, {headers});
+
+            if(data.status === 200) {
+                alert('정보를 변경하였습니다.');
+
+                window.location.href="memberlist2.html";
+
+            } else {
+                alert('정보 변경에 실패하였습니다.')
+            }
+
+        }
        
     </script>
 
