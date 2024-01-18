@@ -27,10 +27,9 @@
 
             if(data.status === 200) {
                 alert('로그인 성공 했습니다.');
-
+                
                 // 로그인 성공 시 세션 저장소(sessionStorage)에 할당된 토큰이 저장됨.
                 sessionStorage.setItem("token", data.token);
-
                 // 주소를 바꾼 다음에 엔터키 누르기
                 window.location.href="memberlist2.html";
 

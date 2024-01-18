@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 작성10</title>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!--스타일 정의-->
     <style>
@@ -21,12 +23,12 @@
 </head>
 
 <body>
-    
+
     <!--전체 프레임-->
     <div class="shadow board_container">
         <!--페이지 제목-->
-            <h3>글쓰기</h3>
-            <hr/>
+        <h3>글쓰기</h3>
+        <hr />
 
         <!--제목-->
         <div class="row g-3 align-items-center margin20">
@@ -34,18 +36,22 @@
                 <label for="title" style="width:80px;" class="col-form-label">제목</label>
             </div>
             <div class="col-auto">
-                <input type="text" id="title" class="form-control"/>  
+                <input type="text" id="title" class="form-control" placeholder="제목" />
             </div>
         </div>
 
 
-         <!--내용-->
-         <div class="row g-3 align-items-start margin20">
+        <!--내용-->
+        <div class="row g-3 align-items-start margin20">
             <div class="col-auto">
                 <label for="content" style="width:80px;" class="col-form-label">내용</label>
             </div>
             <div class="col-auto">
-                <textarea id="content" rows="6" class="form-control" style="width: 300px;"></textarea>
+                <div id="editor" style="height:300px; width:540px;">
+                    <p>Hello World!</p>
+                    <p>Some initial <strong>bold</strong> text</p>
+                    <p><br></p>
+                </div>
             </div>
         </div>
 
@@ -55,48 +61,108 @@
                 <label for="writer" style="width:80px;" class="col-form-label">작성자</label>
             </div>
             <div class="col-auto">
-                <input type="text" id="writer" class="form-control"/>  
+                <input type="text" id="writer" class="form-control" placeholder="작성자" />
             </div>
         </div>
 
-        
+
         <!--버튼 구성-->
         <div class="row g-3 align-items-center margin20">
-                <div class="col-auto" style="margin: 30px auto 0 auto;">
-                    <button onclick="boardwriteAction()" class="btn btn-primary">글쓰기</button>
+            <div class="col-auto" style="margin: 30px auto 0 auto;">
+                <button onclick="writeBoard()" class="btn btn-primary">글쓰기</button>
                 <a href="board10.html" class="btn btn-secondary">목록</a>
-                </div>
             </div>
         </div>
-        
-    </div>   
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
 
-        // 글쓰기 버튼 함수 정의 
-        function boardwriteAction() {
+        // 글쓰기 
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
 
-            //각 항목을 입력하지 않을 경우 경고문 표시
-            if(title.value.length < 1) {
-                alert('제목을 입력해주세요');
-                title.focus();
-                return false;
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean', 'image']
+        ];
+
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+
+
+        async function writeBoard() {
+            // 유효성 검사
+
+            // 게시물 DB에 저장
+            const url = `http://ihongss.com:13000/api/board/insert.json`;
+            const headers = { "Content-Type": "application/json" }
+            const body = {
+                title: title.value,
+                content: quill.getText(),
+                writer: writer.value
+            };
+
+            const { data } = await axios.post(url, body, { headers });
+            console.log(data);
+
+            // 성공 시 알림 
+            console.log(data.status);
+            if (data.status === 200) {
+                alert('게시글이 작성되었습니다.');
+                window.location.href = "board10.html"
             }
 
-            if(content.value.length < 1) {
-                alert('내용을 입력해주세요');
-                content.focus();
-                return false; 
-            }
-            if(writer.value.length < 1) {
-                alert('작성자를 입력해주세요');
-                writer.focus();
-                return false;
-            }
-
-            alert('게시글이 등록되었습니다.')
         }
+
+
+
+
+
+        // // 글쓰기 버튼 함수 정의 
+        // function boardwriteAction() {
+
+
+
+        //     //각 항목을 입력하지 않을 경우 경고문 표시
+        //     if (title.value.length < 1) {
+        //         alert('제목을 입력해주세요');
+        //         title.focus();
+        //         return false;
+        //     }
+
+        //     if (content.value.length < 1) {
+        //         alert('내용을 입력해주세요');
+        //         content.focus();
+        //         return false;
+        //     }
+        //     if (writer.value.length < 1) {
+        //         alert('작성자를 입력해주세요');
+        //         writer.focus();
+        //         return false;
+        //     }
+
+        //     alert('게시글이 등록되었습니다.')
+        // }
 
     </script>
 
 </body>
+
 </html>

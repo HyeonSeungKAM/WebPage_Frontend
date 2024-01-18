@@ -16,9 +16,11 @@
 
         <div id="div2">
             <h3>로그인 후</h3>
+            <label id="loginuser"></label><br />
             <a href="logout3.html"><button>로그아웃</button></a> 
             <a href="update3.html"><button>회원정보변경</button></a>
             <a href="updatepw3.html"><button>비번변경</button></a>
+            <a href="delete3.html"><button>회원탈퇴</button></a>
         </div>
        <br />
         
@@ -44,6 +46,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
+
+        // 로그인, 로그아웃 화면 구분
         // (세션)저장소에서 토큰을 읽어봄
         // 이유: 로그인인지 로그아웃인지 확인하기 위해서 
         let token = sessionStorage.getItem('token');
@@ -59,10 +63,28 @@
             div2.style.display = "block";
         }
 
-
-
-
         // console.log(window); // script에서 사용할 수 있는 명령어
+
+
+        // // 로그인한 유저 이름
+        async function loginName() {
+         let token = sessionStorage.getItem('token');
+         console.log("token");
+
+             const url = `http://ihongss.com:13000/api/member/selectone.json`;
+             const headers = {"auth":token, "Content-Type":"application/json"};
+             const {data} = await axios.get(url, {headers});
+
+             let login_info = data.result;
+             console.log('로그인한 유저이름',login_info.name);
+
+             loginuser.innerHTML = `<p>${login_info.name}님 환영합니다.</p>`;
+            //  loginuser.value = login_info.name;
+         }
+         loginName();
+        
+
+        
         // 회원목록 불러오는 함수(memberlist)
         async function memberlist() {
             // 데이터를 받아올 주소
@@ -94,6 +116,9 @@
            }
 
         memberlist(); // 함수 직접 호출. (사용자의 액션 없이...)
+
+
+        // 로그인한 회원 정보 표시
 
 
 
