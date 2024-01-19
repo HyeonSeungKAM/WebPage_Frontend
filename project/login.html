@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인10</title>
+    <title>로그인</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
         .page_container {
-            width: 700px;
+            width: 500px;
+            height: 600px;
             padding: 20px;
-            margin: 30px auto;
+            margin: 200px auto;
         }
 
-        .margin_bm10 {
-            margin-bottom: 10px;
+        .margin_bm {
+            margin-bottom: 35px;
         }
 
-        .margin_tp10 {
+        .margin_tp {
             margin-top: 10px auto;
         }
     </style>
@@ -25,16 +26,15 @@
 
 <body>
     <!--전체 프레임-->
-    <div class="page_container shadow rounded border border-success">
+    <div class="page_container shadow rounded border">
 
         <!--제목 및 구분선-->
-        <div>
-            <img src="images/tree.jpg" style="width:80px; height:50px;" />
-            <h3 style="display: inline-block;">로그인</h3>
+        <div style="margin-bottom:50px;">
+            <h2 class="text-center">Login</h2>
             <hr />
         </div>
 
-        <div class="row g-3 align-items-center margin_bm10">
+        <div class="row g-3 align-items-center margin_bm">
             <div class="col-auto">
                 <!--클릭 시 label의 for="id"에 의해
                         "id"로 설정된 요소로 커서가 이동함-->
@@ -46,7 +46,7 @@
         </div>
 
 
-        <div class="row g-3 align-items-center margin_bm10">
+        <div class="row g-3 align-items-center margin_bm">
             <div class="col-auto">
                 <!--클릭 시 label의 for="id"에 의해
                         "id"로 설정된 요소로 커서가 이동함-->
@@ -58,10 +58,10 @@
         </div>
 
 
-        <div class="row g-3 align-items-center margin_tp10">
+        <div class="row g-3 align-items-center margin_tp">
             <div class="col-auto" style="margin: 30px auto 0 auto;">
                 <button class="btn btn-primary" onclick="loginAction()">로그인</button>
-                <a href="home10.html" class="btn btn-secondary">홈으로</a>
+                <a href="home.html" class="btn btn-secondary">홈으로</a>
             </div>
         </div>
 
@@ -101,7 +101,7 @@
                     // 로그인 성공 시 세션 저장소(sessionStorage)에 할당된 토큰이 저장됨.
                     sessionStorage.setItem("token", data.token);
                     // 주소를 바꾼 다음에 엔터키 누르기
-                    window.location.href = "home10.html";
+                    window.location.href = "home.html";
 
                 } else {
                     alert('아이디 또는 암호가 틀립니다.')

@@ -115,7 +115,7 @@
             const headers = { "Content-Type": "application/json" }
             const body = {
                 title: title.value,
-                content: quill.getText(),
+                content: quill.root.innerHTML, //quill.getText()는 태그가 제거되고 글자만 뽑아옴.
                 writer: writer.value
             };
 

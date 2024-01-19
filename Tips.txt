@@ -20,6 +20,7 @@ bootstrap 스타일 doc
 파일명 2: javascript 및 sweetalert2 사용한 예제 
 파일명 3: 서버 통신 기능 활용한 예제 (memberlist2.html은 제외)
 
+게시물 변경 페이지: boardedit10 -> 개인 updateboard10 -> 수업
 
 자바스크립트 - 데이터가 페이지에 정확하게 전송됬는지 확인하는 용도
 - <script> </script> </body>
@@ -52,6 +53,7 @@ ex)
         for( let tmp of arr) {
             console.log(tmp);
         }
+
 
 
 https://sweetalert2.github.io/ 
