@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그아웃3</title>
+</head>
+<body>
+    <script>
+        if( confirm('로그아웃 할까요?') ) {
+            sessionStorage.removeItem('token');
+            window.location.href="home.html";
+        } 
+        else {
+            window.location.href="home.html";
+        }
+    </script>
+</body>
+</html>

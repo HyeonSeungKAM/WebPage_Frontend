@@ -37,13 +37,13 @@
             <div class="col-auto">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
-                    <a href="boardwrite10.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
+                    <a href="boardwrite.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
                 </div>
             </div>
 
             <div class="col-auto">
                 <!-- 검색 기능 -->
-                <form action="board10.html" method="get">
+                <form action="board.html" method="get">
                     <div class="row g-3">
                         <div class="col-auto">
                             <input type="hidden" name="page" value="1" />
@@ -143,7 +143,7 @@
                 initiateStartPageClick: false, // 페이지 로딩될때 자동 클릭 방지
                 onPageClick: function (event, page) {
                     // 페이지 네이션에서 사용자가 클릭시 반응하는 코드
-                    window.location.href = `board10.html?page=${page}&${text}`;
+                    window.location.href = `board.html?page=${page}&${text}`;
                 }
             });
         }
@@ -152,7 +152,7 @@
 
         function nextPage(no) {
             console.log(no);
-            window.location.href = `boardcontent10.html?no=${no}`;
+            window.location.href = `boardcontent.html?no=${no}`;
         }
 
     </script>

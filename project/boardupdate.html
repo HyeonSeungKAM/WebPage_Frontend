@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글변경</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <!--스타일 정의-->
+    <style>
+        .board_container {
+            width: 800px;
+            padding: 20px;
+            margin: 30px auto 0px auto;
+        }
+
+        .margin20 {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        글번호(변경 X) <input type="text" id="_id" readonly /><br />
+        글제목(변경 O) <input type="text" id="title" /><br />
+        글내용(변경 o) <div id="editor" style=" height: 300px"></div><br />
+        작성자(변경 O) <input type="text" id="writer" /><br /> 
+        조회수(변경 O) <input type="text" id="hit" readonly/><br /> 
+        날짜(변경 X) <input type="text" id="regdate" readonly /><br /> 
+        <button onclick="handleUpdate()">변경</button>
+        <button onclick="pageContent()">게시판 상세화면으로</button>
+        <a href="board.html" class="btn btn-secondary">목록</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // 글쓰기 
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean', 'image']
+        ];
+
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+    
+    //======================
+
+    //1. no의 값을 받아옴 
+        const urlPath = new URL(window.location.href);
+        const urlParams = urlPath.searchParams;
+        const no = urlParams.get('no');
+        console.log(no);
+    
+
+    //2. 서버에서 no에 해당하는 값을 가져옴 (게시글 변경 전의 내용을 불러옴)
+        async function selectBoardOne() {
+            const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
+            const headers = {"Content-Type":"application/json"};
+            const {data} = await axios.get(url, {headers});
+            console.log(data); 
+
+            //3. 가져온 값을 위의 태그에 적절하게 추가
+            _id.value = data.result._id;
+            title.value = data.result.title;
+            writer.value = data.result.writer;
+            hit.value = data.result.hit;
+            regdate.value = data.result.regdate2;
+            quill.pasteHTML(data.result.content);
+
+        }
+        selectBoardOne();
+
+        // 게시글 변경 기능
+        async function handleUpdate() {
+            const url = `http://ihongss.com:13000/api/board/update.json?no=${_id.value}`;
+            const headers = {"Content-Type":"application/json"};
+            const body = {title: title.value, content:quill.root.innerHTML, writer:writer.value};
+            const {data} = await axios.put(url, body, {headers});
+            console.log(data);
+
+            if(data.status === 200) {
+                alert('게시글을 변경하였습니다.')
+                window.location.href = `boardcontent.html?no=${no}`;
+            } else {
+                alert('게시글 변경에 실패하였습니다.')
+            }
+
+        }
+
+        function pageContent() {
+            window.location.href = `boardcontent.html?no=${no}`;
+        }
+
+    
+    
+    
+    </script>
+
+</body>
+</html>

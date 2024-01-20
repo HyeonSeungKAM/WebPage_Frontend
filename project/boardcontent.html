@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 상세</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <style>
+        .boardc_container {
+            width:900px;
+            margin:30px auto 0px auto;
+            padding:20px;
+        }
+
+        .margin_bm10 {
+            margin-bottom: 20px;
+        }
+
+        .margin_tp10 {
+            margin-top: 10px auto;
+        }
+
+        .label_con {
+            width:80px;
+        }
+
+        .content_con{
+            width:400px;
+        }
+
+        .button_con{
+            margin: 30px auto 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="shadow boardc_container">
+        
+        <h3>글내용</h3>
+        <hr/>
+
+        <!-- 번호 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">글번호</label>
+            </div>
+            <div class="col-auto">
+                <label id="_id" class="form-control content_con"></label>
+            </div>
+        </div>
+        
+        <!-- 제목  -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">제목</label>
+            </div>
+            <div class="col-auto">
+                <label id="title" class="form-control content_con"></label>
+            </div>
+        </div>
+        
+        <!-- 내용 -->
+        <div class="row g-3 align-items-start margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">내용</label>
+            </div>
+            <div class="col-auto">
+                <div id="content" class="form-control content_con" style="word-break: break-all;">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 작성자 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">작성자</label>
+            </div>
+            <div class="col-auto">
+                <label id="writer" class="form-control content_con"></label>
+            </div>
+        </div>
+
+        <!-- 조회수 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">조회수</label>
+            </div>
+            <div class="col-auto">
+                <label id="hit" class="form-control content_con"></label>
+            </div>
+        </div>
+        
+        <!-- 날짜 -->
+        <div class="row g-3 align-items-center margin_bm10">
+            <div class="col-auto">
+                <label class="label_con">날짜</label>
+            </div>
+            <div class="col-auto">
+                <label id="regdate2" class="form-control content_con">11</label>
+            </div>
+        </div>
+        
+        <!-- 버튼 -->
+        <div class="row g-3 align-items-center margin_tp10">
+            <div class="col-auto button_con" >
+                <a href="board.html"><button class="btn btn-primary">목록</button></a>
+                <button class="btn btn-primary" onclick="updatePage()">글수정</button>
+                <button class="btn btn-primary" onclick="deletePage()">글삭제</button>
+                <button class="btn btn-primary" onclick="prevPage()">이전글</button>
+                <button class="btn btn-primary" onclick="nextPage()">다음글</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        // 함수의 바깥 공간(지금 공간) = 함수와 관련없이 공통으로 사용하는 영역
+
+
+
+        //1. 주소창에 ?no=번호 => 번호를 알아야 됨.
+        const urlPath = new URL(window.location.href);
+        const urlParams = urlPath.searchParams;
+        const no = urlParams.get('no');
+
+        let prev = 0;
+        let next = 0;
+
+        //2. 번호 전달에 해당하는 내용을 서버에 받음.
+        async function selectBoardOne() {
+            const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
+            const headers = {"Content-Type":"application/json"};
+            const {data} = await axios.get(url, {headers});
+            console.log(data);
+
+            // 200. 다른 함수에서 사용하기 위해 공통변수(함수 바깥 공간에 있는 변수)에 값을 보관해 둠.
+            prev = data.prevNo;
+            next = data.nextNo;
+
+
+        //3. 받은 정보를 화면에 표시
+
+            _id.innerHTML       += data.result._id;
+            title.innerHTML     += data.result.title;
+            content.innerHTML   += data.result.content;
+            writer.innerHTML   += data.result.writer;
+            hit.innerHTML   += data.result.hit;
+            regdate2.innerHTML += data.result.regdate2;
+
+        };
+        selectBoardOne(); //강제로 호출
+
+
+        // 이전 글 기능
+        function prevPage() {
+            //1. 이전글 번호 받아오기(selectBoardOne에 보관됨)
+            
+            //2. 주소를 이전글 번호로 변경 후 엔터키
+            if(prev===0) {
+                alert('이전글이 없습니다.')
+            } else {
+                window.location.href = `boardcontent.html?no=${prev}`;
+            }
+        };
+
+        // 다음 글 기능
+        function nextPage() {
+            if(next===0) {
+                alert('다음글이 없습니다.')
+            } else {
+                window.location.href = `boardcontent.html?no=${next}`;
+            }
+        };
+
+        // 게시물 삭제
+        async function deletePage() {
+            if( confirm('해당 게시물을 삭제할까요?')) {
+                const url = `http://ihongss.com:13000/api/board/delete.json`;
+                const headers = {"Content-Type":"application/json"};
+                const {data} = await axios.delete(url, {headers:headers, data:{no:no}});
+                console.log(data);
+            
+                if(data.status === 200) {
+                    alert('삭제되었습니다.')
+                    window.location.href=`board.html`;
+                }
+            }
+        };
+
+        function updatePage() {
+            window.location.href=`boardupdate.html?no=${no}`;
+        };
+
+    </script>
+    
+</body>
+</html>
