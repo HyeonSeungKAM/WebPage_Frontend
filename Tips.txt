@@ -76,3 +76,14 @@ https://sweetalert2.github.io/
         // alert('암호를 입력하세요.');
         
     }
+
+
+
+데이터 조작 행위: insert, delete, update, select 
+
+    회원가입, 게시판글쓰기, 답글쓰기 공통점: 
+        사용자가 데이터베이스에 데이터를 추가하는 행위 (insert)
+
+
+[notion]
+- 포트폴리오, 이력서, 기타 회사 업무 등에 사용됨

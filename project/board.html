@@ -94,6 +94,7 @@
         //http://127.0.0.1:5500/class/board10.html 
         //http://127.0.0.1:5500/class/board10.html?page=1&text=     => 페이지네이션 후
 
+
         // 페이지네이션 
         const urlPath = new URL(window.location.href)
         const urlParams = urlPath.searchParams;
@@ -110,6 +111,7 @@
             text = '';
         }
 
+
         // 게시물 데이터 불러오기 
         async function boardList() {
             const url = `http://ihongss.com:13000/api/board/select.json?page=${page}&text=${text}&cnt=10`;
@@ -123,8 +125,8 @@
                 tbody.innerHTML +=
                     `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
                     `<td>${tmp._id}</td>` +
-                    `<td>${tmp.title.substr(0,10)}</td>` +
-                    `<td>${tmp.writer.substr(0,4)}</td>` +
+                    `<td>${tmp.title.substr(0, 10)}</td>` +
+                    `<td>${tmp.writer.substr(0, 4)}</td>` +
                     `<td>${tmp.hit}</td>` +
                     `<td>${tmp.regdate2}</td>` +
                     `</tr>`;
@@ -135,7 +137,7 @@
             $('#pagination-demo').twbsPagination({
                 totalPages: pages, // 전체 페이지 수
                 visiblePages: 5,  // 가로로 보이는 페이지 개수 
-                first: '처음', // 글자 바꾸기 4개
+                first: '처음', // first,prev,last,next 버튼 4개 텍스트 변경
                 prev: '이전',
                 last: '끝',
                 next: '다음',
@@ -150,10 +152,21 @@
         // 수동으로 호출시켜 함수를 동작시킴
         boardList();
 
-        function nextPage(no) {
-            console.log(no);
+
+
+        // 게시글 상세화면으로 이동 함수
+        async function nextPage(no) {
+
+            // 게시글 조회수 증가
+            const url = `http://ihongss.com:13000/api/board/updatehit.json?no=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const body = {};
+            const { data } = await axios.put(url, body, { headers });
+
+            // 상세화면으로 이동
             window.location.href = `boardcontent.html?no=${no}`;
         }
+
 
     </script>
 

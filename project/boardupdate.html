@@ -30,12 +30,13 @@
         조회수(변경 O) <input type="text" id="hit" readonly/><br /> 
         날짜(변경 X) <input type="text" id="regdate" readonly /><br /> 
         <button onclick="handleUpdate()">변경</button>
-        <button onclick="pageContent()">게시판 상세화면으로</button>
+        <button onclick="pageContent()">게시글 상세화면으로</button>
         <a href="board.html" class="btn btn-secondary">목록</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // 글쓰기 
         var toolbarOptions = [
@@ -64,14 +65,15 @@
     
     //======================
 
-    //1. no의 값을 받아옴 
+        // 게시글 이전 값 불러오기
+        //1. no의 값을 받아옴 
         const urlPath = new URL(window.location.href);
         const urlParams = urlPath.searchParams;
         const no = urlParams.get('no');
         console.log(no);
     
 
-    //2. 서버에서 no에 해당하는 값을 가져옴 (게시글 변경 전의 내용을 불러옴)
+        //2. 서버에서 no에 해당하는 값을 가져옴 (게시글 변경 전의 내용을 불러옴)
         async function selectBoardOne() {
             const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
             const headers = {"Content-Type":"application/json"};
@@ -97,15 +99,27 @@
             const {data} = await axios.put(url, body, {headers});
             console.log(data);
 
-            if(data.status === 200) {
-                alert('게시글을 변경하였습니다.')
-                window.location.href = `boardcontent.html?no=${no}`;
-            } else {
-                alert('게시글 변경에 실패하였습니다.')
-            }
+            // 데이터 성공적으로 전송 시 200, 실패 시 -1
+            if (data.status === 200) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "게시글 수정 완료",
+                        text: "게시글이 수정되었습니다",
+                        didClose: () => { //창이 닫힐 때, 
+                            window.location.href = `boardcontent.html?no=${no}`;
+                        }
+                    });
 
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "게시글 수정 실패",
+                        text: "게시글 수정에 실패하였습니다",
+                    });
+                }
         }
 
+        // 게시글 상세화면 이동
         function pageContent() {
             window.location.href = `boardcontent.html?no=${no}`;
         }

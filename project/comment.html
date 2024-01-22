@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글작성</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+
+    <style>
+        .board_container {
+            width: 800px;
+            padding: 20px;
+            margin: 30px auto 0px auto;
+        }
+
+        .margin20 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--전체 프레임-->
+    <div class="shadow board_container">
+        <!--페이지 제목-->
+        <h3>글쓰기</h3>
+        <hr />
+
+        <div>
+
+
+        </div>
+
+        <div>
+
+            
+        </div>
+
+
+        <!--내용-->
+        <div class="row g-3 align-items-start margin20">
+            <div class="col-auto">
+                <label for="content" style="width:80px;" class="col-form-label">내용</label>
+            </div>
+            <div class="col-auto">
+                <div id="editor" style="height:300px; width:540px;">
+                </div>
+            </div>
+        </div>
+
+        <!--작성자-->
+        <div class="row g-3 align-items-center margin20">
+            <div class="col-auto">
+                <label for="writer" style="width:80px;" class="col-form-label">작성자</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="writer" class="form-control" placeholder="작성자" />
+            </div>
+        </div>
+
+
+        <!--버튼 구성-->
+        <div class="row g-3 align-items-center margin20">
+            <div class="col-auto" style="margin: 30px auto 0 auto;">
+                <button onclick="writeComment()" class="btn btn-primary">댓글작성</button>
+                <a href="board.html" class="btn btn-secondary">목록</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        // --답글 생성
+        const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
+        const headers = { "Content-Type": "application/json" }
+        const body = {
+            brd: 게시글번호(답글번호아님),
+            content: 답글내용,
+            writer: 답글작성자
+        }
+        const { data } = await axios.post(url, body, { headers });
+        console.log(data);
+
+    </script>
+</body>
+
+</html>

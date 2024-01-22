@@ -22,3 +22,8 @@ sessionStorage.getItem : 세션 저장소로부터 가져오기
               .remove : 세션 저장소에서 제거하기
 
 
+
+
+[notion]
+- 포트폴리오, 이력서, 기타 회사 업무 등에 사용됨
+- 

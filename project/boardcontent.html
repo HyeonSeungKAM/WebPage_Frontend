@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 상세</title>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
         .boardc_container {
-            width:900px;
-            margin:30px auto 0px auto;
-            padding:20px;
+            width: 900px;
+            margin: 30px auto 0px auto;
+            padding: 20px;
         }
 
         .margin_bm10 {
@@ -21,99 +22,152 @@
         }
 
         .label_con {
-            width:80px;
+            width: 80px;
         }
 
-        .content_con{
-            width:400px;
+        .content_con {
+            width: 400px;
         }
 
-        .button_con{
+        .button_con {
             margin: 30px auto 0 auto;
         }
-
     </style>
 </head>
+
 <body>
     <div class="shadow boardc_container">
-        
-        <h3>글내용</h3>
-        <hr/>
 
-        <!-- 번호 -->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">글번호</label>
-            </div>
-            <div class="col-auto">
-                <label id="_id" class="form-control content_con"></label>
-            </div>
+        <!-- header -->
+        <div class="row g-3">
+            <h3>글내용</h3>
+            <hr />
         </div>
-        
-        <!-- 제목  -->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">제목</label>
+
+        <!-- body -->
+        <div class="row g-3">
+            <!-- content -->
+            <div class="row g-3">
+                <!-- 번호 -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="label_con">글번호</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="_id" class="form-control content_con"></label>
+                    </div>
+                </div>
+
+                <!-- 제목  -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="label_con">제목</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="title" class="form-control content_con"></label>
+                    </div>
+                </div>
+
+                <!-- 내용 -->
+                <div class="row g-3 align-items-start">
+                    <div class="col-auto">
+                        <label class="label_con">내용</label>
+                    </div>
+                    <div class="col-auto">
+                        <div id="content" class="form-control content_con" style="word-break: break-all;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 작성자 -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="label_con">작성자</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="writer" class="form-control content_con"></label>
+                    </div>
+                </div>
+
+                <!-- 조회수 -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="label_con">조회수</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="hit" class="form-control content_con"></label>
+                    </div>
+                </div>
+
+                <!-- 날짜 -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="label_con">날짜</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="regdate2" class="form-control content_con">11</label>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-auto">
-                <label id="title" class="form-control content_con"></label>
+
+            <!-- menu -->
+            <div class="row g-3">
+                <!-- 버튼 -->
+                <div class="row g-3 align-items-center margin_tp10">
+                    <div class="col-auto button_con">
+                        <a href="board.html"><button class="btn btn-primary">목록</button></a>
+                        <button class="btn btn-primary" onclick="updatePage()">글수정</button>
+                        <button class="btn btn-primary" onclick="deletePage()">글삭제</button>
+                        <button class="btn btn-primary" onclick="prevPage()">이전글</button>
+                        <button class="btn btn-primary" onclick="nextPage()">다음글</button>
+                    </div>
+                </div>
+
             </div>
-        </div>
-        
-        <!-- 내용 -->
-        <div class="row g-3 align-items-start margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">내용</label>
-            </div>
-            <div class="col-auto">
-                <div id="content" class="form-control content_con" style="word-break: break-all;">
+
+            <!-- comment -->
+            <div class="row g-3">
+                <!-- 댓글 작성 -->
+                <div class="row g-3">
+                    <!-- 입력란 -->
+                    <div class="row">
+                        <div class="col-auto">
+                            <input type="text" id="c_writer" class="form-control" placeholder="작성자" />
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="c_content" class="form-control" placeholder="댓글 내용을 작성해주세요" />
+                        </div>
+                    </div>
+                    <!-- 버튼 -->
+                    <div class="row g-3">
+                        <div class="col-auto">
+                            <button onclick="writeComment()">댓글 생성</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 작성된 댓글  -->
+                <div class="row g-3">
+                        <table class="table table-striped" style="text-align:center;">
+                            <thead>
+                            </thead>
+                            <tbody id="cbody">
+            
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
                 </div>
             </div>
-        </div>
-        
-        <!-- 작성자 -->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">작성자</label>
-            </div>
-            <div class="col-auto">
-                <label id="writer" class="form-control content_con"></label>
-            </div>
-        </div>
 
-        <!-- 조회수 -->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">조회수</label>
-            </div>
-            <div class="col-auto">
-                <label id="hit" class="form-control content_con"></label>
-            </div>
-        </div>
-        
-        <!-- 날짜 -->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label class="label_con">날짜</label>
-            </div>
-            <div class="col-auto">
-                <label id="regdate2" class="form-control content_con">11</label>
-            </div>
-        </div>
-        
-        <!-- 버튼 -->
-        <div class="row g-3 align-items-center margin_tp10">
-            <div class="col-auto button_con" >
-                <a href="board.html"><button class="btn btn-primary">목록</button></a>
-                <button class="btn btn-primary" onclick="updatePage()">글수정</button>
-                <button class="btn btn-primary" onclick="deletePage()">글삭제</button>
-                <button class="btn btn-primary" onclick="prevPage()">이전글</button>
-                <button class="btn btn-primary" onclick="nextPage()">다음글</button>
-            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         // 함수의 바깥 공간(지금 공간) = 함수와 관련없이 공통으로 사용하는 영역
@@ -131,8 +185,8 @@
         //2. 번호 전달에 해당하는 내용을 서버에 받음.
         async function selectBoardOne() {
             const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
-            const headers = {"Content-Type":"application/json"};
-            const {data} = await axios.get(url, {headers});
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
             console.log(data);
 
             // 200. 다른 함수에서 사용하기 위해 공통변수(함수 바깥 공간에 있는 변수)에 값을 보관해 둠.
@@ -140,13 +194,13 @@
             next = data.nextNo;
 
 
-        //3. 받은 정보를 화면에 표시
+            //3. 받은 정보를 화면에 표시
 
-            _id.innerHTML       += data.result._id;
-            title.innerHTML     += data.result.title;
-            content.innerHTML   += data.result.content;
-            writer.innerHTML   += data.result.writer;
-            hit.innerHTML   += data.result.hit;
+            _id.innerHTML += data.result._id;
+            title.innerHTML += data.result.title;
+            content.innerHTML += data.result.content;
+            writer.innerHTML += data.result.writer;
+            hit.innerHTML += data.result.hit;
             regdate2.innerHTML += data.result.regdate2;
 
         };
@@ -156,9 +210,9 @@
         // 이전 글 기능
         function prevPage() {
             //1. 이전글 번호 받아오기(selectBoardOne에 보관됨)
-            
+
             //2. 주소를 이전글 번호로 변경 후 엔터키
-            if(prev===0) {
+            if (prev === 0) {
                 alert('이전글이 없습니다.')
             } else {
                 window.location.href = `boardcontent.html?no=${prev}`;
@@ -167,7 +221,7 @@
 
         // 다음 글 기능
         function nextPage() {
-            if(next===0) {
+            if (next === 0) {
                 alert('다음글이 없습니다.')
             } else {
                 window.location.href = `boardcontent.html?no=${next}`;
@@ -176,24 +230,90 @@
 
         // 게시물 삭제
         async function deletePage() {
-            if( confirm('해당 게시물을 삭제할까요?')) {
-                const url = `http://ihongss.com:13000/api/board/delete.json`;
-                const headers = {"Content-Type":"application/json"};
-                const {data} = await axios.delete(url, {headers:headers, data:{no:no}});
-                console.log(data);
-            
-                if(data.status === 200) {
-                    alert('삭제되었습니다.')
-                    window.location.href=`board.html`;
+
+            Swal.fire({
+                title: "해당 게시글을 삭제할까요?",
+                text: "삭제 시 해당 게시글은 복구가 불가능합니다",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "예",
+                cancelButtonText: "아니오"
+
+                // result를 async()로 감싸서 await를 사용할 수 있도록 설정
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+
+                    const url = `http://ihongss.com:13000/api/board/delete.json`;
+                    const headers = { "Content-Type": "application/json" };
+                    const { data } = await axios.delete(url, { headers: headers, data: { no: no } });
+                    console.log(data);
+
+                    if (data.status === 200) {
+                        Swal.fire({
+                            title: "게시글 삭제 완료",
+                            text: "해당 게시글이 삭제되었습니다",
+                            icon: "success",
+                            didClose: () => { //창이 닫힐 때, 
+                                window.location.href = "board.html";
+                            }
+                        });
+
+                    }
+                    else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "게시글 삭제 실패",
+                            text: "게시글 삭제에 실패하였습니다",
+                        });
+                    }
                 }
-            }
+            });
         };
 
+        // 게시글 수정 페이지 이동 함수
         function updatePage() {
-            window.location.href=`boardupdate.html?no=${no}`;
+            window.location.href = `boardupdate.html?no=${no}`;
         };
+
+
+        // 댓글 작성 함수
+        async function writeComment() {
+            const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
+            const headers = { "Content-Type": "application/json" }
+            const body = {
+                brd: `${no}`, // 게시글 번호 
+                content: c_content.value ,// 답글내용
+                writer: c_writer.value //답글작성자
+            }
+            const { data } = await axios.post(url, body, { headers });
+            console.log(data);
+        };
+
+
+        // -- 답글 조회
+        async function getComment() {
+            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log(data);
+
+            let rows = data.rows;
+            for (let tmp of rows) {
+                //tbody에 추가
+                cbody.innerHTML +=
+                    `<tr>` +
+                    `<td>${tmp.writer}</td>` +
+                    `<td>${tmp.content}</td>` +
+                    `</tr>`;
+            }
+        }
+        getComment();
+
 
     </script>
-    
+
 </body>
+
 </html>
