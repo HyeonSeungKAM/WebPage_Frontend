@@ -224,6 +224,7 @@
         };
         selectBoardOne(); //강제로 호출
 
+<<<<<<< HEAD
         // 답글 갯수 조회
         async function commnetNum() {
             const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=${no}`;
@@ -241,11 +242,16 @@
         // 특정 게시글의 댓글(답글) 불러오기
         async function getComment() {
             // brd는 게시글의 id값
+=======
+         // -- 답글 조회
+         async function getComment() {
+>>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
             const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, { headers });
             console.log(data);
 
+<<<<<<< HEAD
             if (data.status === 200) {
                 let rows = data.rows;
                 for (let tmp of rows) {
@@ -267,6 +273,23 @@
             }
         };
         getComment();
+=======
+            let rows = data.rows;
+            for (let tmp of rows) {
+                //tbody에 추가
+                cbody.innerHTML +=
+                    `<tr>` +
+                    `<td>${tmp.writer}</td>` +
+                    `<td>${tmp.content}</td>` +
+                    `</tr>` +
+                    `<tr>` +
+                    `<td><button>댓글삭제</button></td>` +
+                    `</tr>`;
+            }
+        }
+        getComment();
+
+>>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
 
         // 이전 글 기능
         function prevPage() {
@@ -357,6 +380,7 @@
         };
 
 
+<<<<<<< HEAD
         // --답글 삭제
         async function deleteComment(_id) {
             alert("댓글 삭제");
@@ -370,6 +394,9 @@
         };
 
         
+=======
+       
+>>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
 
 
     </script>
