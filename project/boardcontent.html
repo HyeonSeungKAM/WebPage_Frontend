@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 상세</title>
+    <title>게시글 상세 페이지</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
         .boardc_container {
             width: 800px;
-            margin: 30px auto 0px auto;
             padding: 20px;
+            margin: 30px auto 30px auto;
         }
 
-        .margin_bm10 {
+        .m-bm10 {
             margin-bottom: 20px;
         }
 
-        .margin_tp10 {
-            margin-top: 10px auto;
+        .m-tp10 {
+            margin-top: 20px;
         }
 
         .label_con {
@@ -40,134 +40,101 @@
 
         <!-- header -->
         <div class="row g-3">
-            <h3>글내용</h3>
+            <h3>게시글 상세 페이지</h3>
             <hr />
         </div>
 
         <!-- body -->
-        <div class="row g-3">
+        <div class="row g-3 align-items-center justify-content-center">
             <!-- content -->
             <div class="row g-3">
 
                 <!-- 글번호 및 작성날짜 -->
                 <div class="row g-2 align-items-center">
-                    <div class="col-auto">
-                        <label>글번호:</label>
-                    </div>
-                    <div class="col-auto">
-                        <label id="_id" class="form-control"></label>
-                    </div>
-                    <div class="col-auto">
-                        <label>날짜:</label>
-                    </div>
-                    <div class="col-auto">
+                    <div class="col-auto input-group">
+                        <label class="input-group-text">글번호</label>
+                        <label class="form-control" id="_id"></label>
+                        <label class="input-group-text">날짜</label>
                         <label id="regdate2" class="form-control"></label>
                     </div>
                 </div>
 
-                <!-- 조회수 및 댓글 수 -->
+                <!-- 작성자, 조회 수 및 댓글 수 -->
                 <div class="row g-2 align-items-center">
-                    <div class="col-auto">
-                        <label>조회수:</label>
-                    </div>
-                    <div class="col-auto">
+                    <div class="col-auto input-group">
+                        <label class="input-group-text">작성자</label>
+                        <label id="writer" class="form-control"></label>
+                        <label class="input-group-text">조회수</label>
                         <label id="hit" class="form-control"></label>
-                    </div>
-                    <div class="col-auto">
-                        <label>댓글 수:</label>
-                    </div>
-                    <div class="col-auto">
+                        <label class="input-group-text">댓글 수</label>
                         <label id="num_comment" class="form-control"></label>
                     </div>
                 </div>
 
                 <!-- 제목  -->
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="label_con">제목</label>
-                    </div>
-                    <div class="col-auto">
-                        <label id="title" class="form-control content_con"></label>
+                <div class="row g-2 align-items-center m-bm10 ">
+                    <div class="col-auto input-group">
+                        <label class="input-group-text">제목</label>
+                        <label id="title" class="form-control"></label>
                     </div>
                 </div>
-
-                <!-- 작성자 -->
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="label_con">작성자</label>
-                    </div>
-                    <div class="col-auto">
-                        <label id="writer" class="form-control content_con"></label>
-                    </div>
-                </div>
-
-                
-
-                
 
                 <!-- 내용 -->
-                <div class="row g-3 align-items-start">
-                    <div class="col-auto">
-                        <label class="label_con">내용</label>
-                    </div>
-                    <div class="col-auto">
-                        <div id="content" class="form-control content_con" style="height:300px; width:100%; word-break: break-all;">
+                <div class="row g-2 align-items-start">
+                    <div class="col">
+                        <div id="content" class="form-control" style="height:500px; word-break: break-all;">
                         </div>
                     </div>
                 </div>
-
-                
-
-                
-
-
 
             </div>
 
             <!-- menu -->
             <div class="row g-3">
                 <!-- 버튼 -->
-                <div class="row g-3 align-items-center margin_tp10">
+                <div class="row g-3 align-items-center">
                     <div class="col-auto button_con">
+                        <button class="btn btn-primary" onclick="nextPage()">다음글</button>
                         <a href="board.html"><button class="btn btn-primary">목록</button></a>
                         <button class="btn btn-primary" onclick="updatePage()">글수정</button>
                         <button class="btn btn-primary" onclick="deletePage()">글삭제</button>
                         <button class="btn btn-primary" onclick="prevPage()">이전글</button>
-                        <button class="btn btn-primary" onclick="nextPage()">다음글</button>
                     </div>
                 </div>
 
             </div>
 
+
+
+
             <!-- comment -->
-            <div class="row g-3">
+            <div class="container row g-3 m-tp10">
+
                 <!-- 댓글 작성 -->
-                <div class="row g-3">
+                <div class="row g-2">
                     <!-- 입력란 -->
-                    <div class="row">
-                        <div class="col-auto">
-                            <input type="text" id="c_writer" class="form-control" placeholder="작성자" />
+                    <div class="row g-2">
+                        <div class="col-auto input-group">
+                            <label class="input-group-text">작성자</label>
+                            <input type="text" id="c_writer" class="form-control" placeholder="댓글 작성자를 입력해주세요" />
                         </div>
-                        <div class="col-auto">
-                            <input type="text" id="c_content" class="form-control" placeholder="댓글 내용을 작성해주세요" />
+                        <div class="col-auto input-group">
+                            <textarea style="height:100px;" id="c_content" class="form-control"
+                                placeholder="댓글 내용을 작성해주세요"></textarea>
                         </div>
                     </div>
+
                     <!-- 버튼 -->
-                    <div class="row g-3">
+                    <div class="row g-2 justify-content-end  m-bm10">
                         <div class="col-auto">
-                            <button onclick="writeComment()">댓글 생성</button>
+                            <button class="btn btn-outline-primary" onclick="writeComment()">댓글 생성</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 작성된 댓글  -->
-                <div class="row g-3 align-items-center">
-                    <div>
-                        <label>댓글</label>
-                        <hr />
-                    </div>
-
-                    <table class="table table-striped" style="text-align:center;">
+                <div class="row g-2 align-items-center">
+                    <table style="text-align:left;">
                         <thead>
                         </thead>
                         <tbody id="cbody">
@@ -175,13 +142,12 @@
                         </tbody>
                     </table>
 
-
                 </div>
 
             </div>
-        </div>
 
-    </div>
+
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -191,7 +157,7 @@
         // 함수의 바깥 공간(지금 공간) = 함수와 관련없이 공통으로 사용하는 영역
 
         // 게시글 클릭 시 주소창 끝에 "?no=번호" 통해 해당 게시글의 번호를 확인할 수 있음. 
-        
+
         //1. 주소창의 ?no=번호 => 번호를 가져옴.
         const urlPath = new URL(window.location.href);
         const urlParams = urlPath.searchParams;
@@ -200,22 +166,22 @@
         let prev = 0;
         let next = 0;
 
-        
+
         //2. 해당 게시글의 번호에 해당하는 내용을 서버에 받음.
         async function selectBoardOne() {
             const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, { headers });
-            console.log("게시글 내용",data);
+            console.log("게시글 내용", data);
 
             // 200. 다른 함수에서 사용하기 위해 공통변수(함수 바깥 공간에 있는 변수)에 값을 보관해 둠.
             prev = data.prevNo;
             next = data.nextNo;
 
 
-        //3. 받은 정보를 화면에 표시
+            //3. 받은 정보를 화면에 표시
             _id.innerHTML += data.result._id;
-            title.innerHTML += data.result.title;
+            title.innerHTML += `<h3><b>${data.result.title}</b></h3>`;
             content.innerHTML += data.result.content;
             writer.innerHTML += data.result.writer;
             hit.innerHTML += data.result.hit;
@@ -224,7 +190,6 @@
         };
         selectBoardOne(); //강제로 호출
 
-<<<<<<< HEAD
         // 답글 갯수 조회
         async function commnetNum() {
             const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=${no}`;
@@ -233,7 +198,7 @@
             console.log("댓글 개수", data.total);
 
             num_comment.innerHTML += data.total;
-            
+
         };
         commnetNum();
 
@@ -242,30 +207,25 @@
         // 특정 게시글의 댓글(답글) 불러오기
         async function getComment() {
             // brd는 게시글의 id값
-=======
-         // -- 답글 조회
-         async function getComment() {
->>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
             const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, { headers });
             console.log(data);
 
-<<<<<<< HEAD
             if (data.status === 200) {
                 let rows = data.rows;
                 for (let tmp of rows) {
                     //tbody에 추가
                     cbody.innerHTML +=
                         `<tr>` +
-                        `<td>${tmp._id}</td>` +
-                        `<td>${tmp.writer}</td>` +
-                        `<td>${tmp.content}</td>` +
+                        `<td><b>${tmp.writer}</b></td>` +
+                        `<td class="align-middle" rowspan='2'>${tmp.content}</td>` +
+                        `<td class="align-middle" style="width:100px;" rowspan='2'><button onclick="deleteComment(${tmp._id})">댓글삭제</button></td>` +
                         `</tr>` +
                         `<tr>` +
-                            // 특정 댓글 삭제를 위해 deleteComment 함수에 입력값을 댓글 id로 선정
-                        `<td><button onclick="deleteComment(${tmp._id})">댓글삭제</button></td>` + 
-                        `</tr>`;
+                        `<td style="width:250px;">( ${tmp.regdate2} )</td>` +
+                        `</tr>` + 
+                        `<tr><td colspan='3'><hr /></td></tr>`;
                 }
             } else {
                 cbody.innerHTML +=
@@ -273,23 +233,6 @@
             }
         };
         getComment();
-=======
-            let rows = data.rows;
-            for (let tmp of rows) {
-                //tbody에 추가
-                cbody.innerHTML +=
-                    `<tr>` +
-                    `<td>${tmp.writer}</td>` +
-                    `<td>${tmp.content}</td>` +
-                    `</tr>` +
-                    `<tr>` +
-                    `<td><button>댓글삭제</button></td>` +
-                    `</tr>`;
-            }
-        }
-        getComment();
-
->>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
 
         // 이전 글 기능
         function prevPage() {
@@ -380,7 +323,6 @@
         };
 
 
-<<<<<<< HEAD
         // --답글 삭제
         async function deleteComment(_id) {
             alert("댓글 삭제");
@@ -393,10 +335,7 @@
 
         };
 
-        
-=======
-       
->>>>>>> 9a7be16d9b973e8b1b4c4b7f020864ee6625d41c
+
 
 
     </script>
