@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판10</title>
+    <title>게시판</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
         .board_container {
             width: 1200px;
             padding: 20px;
-            margin: 0px auto 0px auto;
+            margin: 30px auto;
         }
 
         .margin {
@@ -29,7 +29,7 @@
 
         <!--페이지 제목-->
         <div class="margin">
-            <h3>게시판10</h3>
+            <h3>게시판</h3>
         </div>
 
         <!--버튼 및 검색란-->
@@ -54,7 +54,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
 
@@ -163,8 +162,14 @@
             const body = {};
             const { data } = await axios.put(url, body, { headers });
 
+            if(data.status === 200) {
+
+                window.location.href = `boardcontent.html?no=${no}`;
+                //2. 게시글 상세 페이지 이동
+            }
+
             // 상세화면으로 이동
-            window.location.href = `boardcontent.html?no=${no}`;
+           
         }
 
 

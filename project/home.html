@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈화면10</title>
+    <title>홈화면</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
         :is(.page_container, .line_tg1, .line_tg2, .text1, .text2, .madeby, .menu_container, .user_info) {
@@ -120,6 +120,9 @@
                         <span class="border-bottom border-dark-subtle"><a href="delete.html">회원탈퇴</a></span>
                     </div>
                     <div class="p-2">
+                        <span class="border-bottom border-dark-subtle"><a href="memberlist.html">회원목록</a></span>
+                    </div>
+                    <div class="p-2">
                         <span class="border-bottom border-dark-subtle"><a href="board.html">게시판</a></span>
                     </div>
 
@@ -182,7 +185,7 @@
         // (세션)저장소에서 토큰을 읽어봄
         // 이유: 로그인인지 로그아웃인지 확인하기 위해서 
         let token = sessionStorage.getItem('token');
-        console.log(token);
+        console.log("토큰",token);
 
         if (token === null) {
             //과거에 로그인 한 적이 없음
@@ -206,7 +209,7 @@
                 let login_info = data.result;
                 console.log('로그인한 유저이름', login_info.name);
 
-                loginuser.innerHTML = `<div class="card"><div class="card-body">
+                loginuser.innerHTML = `<div class="card shadow"><div class="card-body">
                 <h5 class="card-title">${login_info.name}님</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">환영합니다.</h6>
                 <p class="card-text"></p>

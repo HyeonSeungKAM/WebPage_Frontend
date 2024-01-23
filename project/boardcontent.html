@@ -8,7 +8,7 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
         .boardc_container {
-            width: 900px;
+            width: 800px;
             margin: 30px auto 0px auto;
             padding: 20px;
         }
@@ -48,13 +48,36 @@
         <div class="row g-3">
             <!-- content -->
             <div class="row g-3">
-                <!-- 번호 -->
-                <div class="row g-3 align-items-center">
+
+                <!-- 글번호 및 작성날짜 -->
+                <div class="row g-2 align-items-center">
                     <div class="col-auto">
-                        <label class="label_con">글번호</label>
+                        <label>글번호:</label>
                     </div>
                     <div class="col-auto">
-                        <label id="_id" class="form-control content_con"></label>
+                        <label id="_id" class="form-control"></label>
+                    </div>
+                    <div class="col-auto">
+                        <label>날짜:</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="regdate2" class="form-control"></label>
+                    </div>
+                </div>
+
+                <!-- 조회수 및 댓글 수 -->
+                <div class="row g-2 align-items-center">
+                    <div class="col-auto">
+                        <label>조회수:</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="hit" class="form-control"></label>
+                    </div>
+                    <div class="col-auto">
+                        <label>댓글 수:</label>
+                    </div>
+                    <div class="col-auto">
+                        <label id="num_comment" class="form-control"></label>
                     </div>
                 </div>
 
@@ -68,17 +91,6 @@
                     </div>
                 </div>
 
-                <!-- 내용 -->
-                <div class="row g-3 align-items-start">
-                    <div class="col-auto">
-                        <label class="label_con">내용</label>
-                    </div>
-                    <div class="col-auto">
-                        <div id="content" class="form-control content_con" style="word-break: break-all;">
-                        </div>
-                    </div>
-                </div>
-
                 <!-- 작성자 -->
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
@@ -89,25 +101,26 @@
                     </div>
                 </div>
 
-                <!-- 조회수 -->
-                <div class="row g-3 align-items-center">
+                
+
+                
+
+                <!-- 내용 -->
+                <div class="row g-3 align-items-start">
                     <div class="col-auto">
-                        <label class="label_con">조회수</label>
+                        <label class="label_con">내용</label>
                     </div>
                     <div class="col-auto">
-                        <label id="hit" class="form-control content_con"></label>
+                        <div id="content" class="form-control content_con" style="height:300px; width:100%; word-break: break-all;">
+                        </div>
                     </div>
                 </div>
 
-                <!-- 날짜 -->
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label class="label_con">날짜</label>
-                    </div>
-                    <div class="col-auto">
-                        <label id="regdate2" class="form-control content_con">11</label>
-                    </div>
-                </div>
+                
+
+                
+
+
 
             </div>
 
@@ -148,22 +161,27 @@
                 </div>
 
                 <!-- 작성된 댓글  -->
-                <div class="row g-3">
-                        <table class="table table-striped" style="text-align:center;">
-                            <thead>
-                            </thead>
-                            <tbody id="cbody">
-            
-                            </tbody>
-                        </table>
-
-
+                <div class="row g-3 align-items-center">
+                    <div>
+                        <label>댓글</label>
+                        <hr />
                     </div>
 
-                </div>
-            </div>
+                    <table class="table table-striped" style="text-align:center;">
+                        <thead>
+                        </thead>
+                        <tbody id="cbody">
 
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
         </div>
+
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -172,9 +190,9 @@
 
         // 함수의 바깥 공간(지금 공간) = 함수와 관련없이 공통으로 사용하는 영역
 
-
-
-        //1. 주소창에 ?no=번호 => 번호를 알아야 됨.
+        // 게시글 클릭 시 주소창 끝에 "?no=번호" 통해 해당 게시글의 번호를 확인할 수 있음. 
+        
+        //1. 주소창의 ?no=번호 => 번호를 가져옴.
         const urlPath = new URL(window.location.href);
         const urlParams = urlPath.searchParams;
         const no = urlParams.get('no');
@@ -182,20 +200,20 @@
         let prev = 0;
         let next = 0;
 
-        //2. 번호 전달에 해당하는 내용을 서버에 받음.
+        
+        //2. 해당 게시글의 번호에 해당하는 내용을 서버에 받음.
         async function selectBoardOne() {
             const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, { headers });
-            console.log(data);
+            console.log("게시글 내용",data);
 
             // 200. 다른 함수에서 사용하기 위해 공통변수(함수 바깥 공간에 있는 변수)에 값을 보관해 둠.
             prev = data.prevNo;
             next = data.nextNo;
 
 
-            //3. 받은 정보를 화면에 표시
-
+        //3. 받은 정보를 화면에 표시
             _id.innerHTML += data.result._id;
             title.innerHTML += data.result.title;
             content.innerHTML += data.result.content;
@@ -206,6 +224,49 @@
         };
         selectBoardOne(); //강제로 호출
 
+        // 답글 갯수 조회
+        async function commnetNum() {
+            const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log("댓글 개수", data.total);
+
+            num_comment.innerHTML += data.total;
+            
+        };
+        commnetNum();
+
+
+
+        // 특정 게시글의 댓글(답글) 불러오기
+        async function getComment() {
+            // brd는 게시글의 id값
+            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log(data);
+
+            if (data.status === 200) {
+                let rows = data.rows;
+                for (let tmp of rows) {
+                    //tbody에 추가
+                    cbody.innerHTML +=
+                        `<tr>` +
+                        `<td>${tmp._id}</td>` +
+                        `<td>${tmp.writer}</td>` +
+                        `<td>${tmp.content}</td>` +
+                        `</tr>` +
+                        `<tr>` +
+                            // 특정 댓글 삭제를 위해 deleteComment 함수에 입력값을 댓글 id로 선정
+                        `<td><button onclick="deleteComment(${tmp._id})">댓글삭제</button></td>` + 
+                        `</tr>`;
+                }
+            } else {
+                cbody.innerHTML +=
+                    `<tr><td>현재 아무런 댓글이 달려있지 않습니다.</td></tr>`;
+            }
+        };
+        getComment();
 
         // 이전 글 기능
         function prevPage() {
@@ -227,6 +288,8 @@
                 window.location.href = `boardcontent.html?no=${next}`;
             }
         };
+
+
 
         // 게시물 삭제
         async function deletePage() {
@@ -272,6 +335,8 @@
             });
         };
 
+
+
         // 게시글 수정 페이지 이동 함수
         function updatePage() {
             window.location.href = `boardupdate.html?no=${no}`;
@@ -281,35 +346,30 @@
         // 댓글 작성 함수
         async function writeComment() {
             const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
-            const headers = { "Content-Type": "application/json" }
+            const headers = { "Content-Type": "application/json" };
             const body = {
                 brd: `${no}`, // 게시글 번호 
-                content: c_content.value ,// 답글내용
+                content: c_content.value,// 답글내용
                 writer: c_writer.value //답글작성자
             }
             const { data } = await axios.post(url, body, { headers });
-            console.log(data);
+            window.location.reload();
         };
 
 
-        // -- 답글 조회
-        async function getComment() {
-            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
+        // --답글 삭제
+        async function deleteComment(_id) {
+            alert("댓글 삭제");
+            const url = `http://ihongss.com:13000/api/boardreply/delete.json`;
             const headers = { "Content-Type": "application/json" };
-            const { data } = await axios.get(url, { headers });
+            const { data } = await axios.delete(url, { headers: headers, data: { no: _id } });
             console.log(data);
+            window.location.reload();
 
-            let rows = data.rows;
-            for (let tmp of rows) {
-                //tbody에 추가
-                cbody.innerHTML +=
-                    `<tr>` +
-                    `<td>${tmp.writer}</td>` +
-                    `<td>${tmp.content}</td>` +
-                    `</tr>`;
-            }
-        }
-        getComment();
+
+        };
+
+        
 
 
     </script>

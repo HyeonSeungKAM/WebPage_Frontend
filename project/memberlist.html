@@ -4,23 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원목록2</title>
+    <title>회원목록</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .board_container {
+            width: 1200px;
+            padding: 20px;
+            margin: 30px auto;
+        }
 
+        .margin {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <div id="div1">
-            <h3>로그인 전</h3>
-            <a href="login3.html"><button>로그인</button></a>
-            <a href="join3.html"><button>회원가입</button></a>
+    <div class="board_container shadow">
+
+        <!--페이지 제목-->
+        <div class="margin">
+            <h3>회원목록</h3>
         </div>
 
-        <div>
+        <!--버튼 및 검색란-->
+        <div class="row g-3 d-flex justify-content-between margin">
+            <div class="col-auto">
+                <div id="div1" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
+                    <a href="board.html"><button type="button" class="btn btn-danger">게시판</button></a>
+                    <a href="login.html"><button type="button" class="btn btn-warning">로그인</button></a>
+                    <a href="join.html"><button type="button" class="btn btn-warning">회원가입</button></a>
+                </div>
+                <div id="div2" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
+                    <a href="board.html"><button type="button" class="btn btn-danger">게시판</button></a>
+                    <a href="logout.html"><button type="button" class="btn btn-warning">로그아웃</button></a>
+                    <a href="updatepw.html"><button type="button" class="btn btn-warning">암호변경</button></a>
+                    <a href="update.html"><button type="button" class="btn btn-warning">회원정보변경</button></a>
+                    <a href="delete.html"><button type="button" class="btn btn-warning">회원탈퇴</button></a>
+                </div>
+            </div>
+
             <div class="col-auto">
                 <!-- 검색 기능 -->
-                <form action="memberlist2.html" method="get">
+                <form action="memberlist.html" method="get">
                     <div class="row g-3">
                         <div class="col-auto">
                             <input type="hidden" name="page" value="1" />
@@ -34,30 +67,20 @@
             </div>
         </div>
 
-
-        <div id="div2">
-            <h3>로그인 후</h3>
-            <label id="loginuser"></label><br />
-            <a href="logout3.html"><button>로그아웃</button></a>
-            <a href="update3.html"><button>회원정보변경</button></a>
-            <a href="updatepw3.html"><button>비번변경</button></a>
-            <a href="delete3.html"><button>회원탈퇴</button></a>
-        </div>
-        <br />
-
-        <div>
-            <table border="1">
+        <!-- 회원목록 -->
+        <div class="margin">
+            <table  class="table table-striped">
                 <thead>
                     <tr>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>나이</th>
-                        <th>이메일</th>
-                        <th>등록일</th>
+                        <th style="width:100px;">아이디</th>
+                        <th style="width:100px;">이름</th>
+                        <th style="width:50px;">나이</th>
+                        <th style="width:200px;">이메일</th>
+                        <th style="width:200px;">등록일</th>
                     </tr>
 
                 </thead>
-                <tbody id="tbody" style="text-align: center;">
+                <tbody id="tbody">
                 </tbody>
             </table>
         </div>
@@ -145,14 +168,14 @@
                 
                 // 받은 데이터가 200(정상)이면
                 let arr = data.rows;    // 변수 arr에 받은 데이터의 rows를 할당
-                console.log(arr);
+                console.log("회원목록",arr);
 
                 // arr 요소들을 tmp에 할당
                 for (let tmp of arr) {
                     tbody.innerHTML +=
                         `<tr>` +
-                        `<td>${tmp._id}</td>` +
-                        `<td>${tmp.name}</td>` +
+                        `<td>${tmp._id.substr(0,5)}</td>` +
+                        `<td>${tmp.name.substr(0,3)}</td>` +
                         `<td>${tmp.age}</td>` +
                         `<td>${tmp.email}</td>` +
                         `<td>${tmp.regdate2}</td>` +
@@ -172,7 +195,7 @@
                     initiateStartPageClick: false, // 페이지 로딩될때 자동 클릭 방지
                     onPageClick: function (event, page) {
                         // 페이지 네이션에서 사용자가 클릭시 반응하는 코드
-                        window.location.href = `memberlist2.html?page=${page}&${text}`;
+                        window.location.href = `memberlist.html?page=${page}&${text}`;
                     }
                 });
             }
