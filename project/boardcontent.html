@@ -206,6 +206,28 @@
         };
         selectBoardOne(); //강제로 호출
 
+         // -- 답글 조회
+         async function getComment() {
+            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log(data);
+
+            let rows = data.rows;
+            for (let tmp of rows) {
+                //tbody에 추가
+                cbody.innerHTML +=
+                    `<tr>` +
+                    `<td>${tmp.writer}</td>` +
+                    `<td>${tmp.content}</td>` +
+                    `</tr>` +
+                    `<tr>` +
+                    `<td><button>댓글삭제</button></td>` +
+                    `</tr>`;
+            }
+        }
+        getComment();
+
 
         // 이전 글 기능
         function prevPage() {
@@ -288,28 +310,11 @@
                 writer: c_writer.value //답글작성자
             }
             const { data } = await axios.post(url, body, { headers });
-            console.log(data);
+            window.location.reload();
         };
 
 
-        // -- 답글 조회
-        async function getComment() {
-            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
-            const headers = { "Content-Type": "application/json" };
-            const { data } = await axios.get(url, { headers });
-            console.log(data);
-
-            let rows = data.rows;
-            for (let tmp of rows) {
-                //tbody에 추가
-                cbody.innerHTML +=
-                    `<tr>` +
-                    `<td>${tmp.writer}</td>` +
-                    `<td>${tmp.content}</td>` +
-                    `</tr>`;
-            }
-        }
-        getComment();
+       
 
 
     </script>
