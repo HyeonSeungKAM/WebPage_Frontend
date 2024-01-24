@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>암호변경10</title>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/bootstrap.css" rel="stylesheet" />
 
     <!--스타일 정의-->
     <style>
         .page_container {
-            width:700px;
-            padding:20px;
-            margin:30px auto;
+            width: 450px;
+            padding: 10px;
+            margin: 200px auto;
         }
-        .p_label{
-            width:120px;  
-        }
-
-        .margin_bm10 {
-            margin-bottom:10px;
-        }
-
-        
-    
     </style>
 
 </head>
@@ -30,65 +21,64 @@
 
 <body>
     <!--전체 프레임-->
-    <div class="page_container shadow rounded border border-success">
+    <div class="page_container shadow rounded border">
 
         <!--제목 및 구분선-->
-            <h3>암호변경3</h3>
+        <div class="row">
+            <h2 class="text-center">암호변경3</h2>
             <hr />
-        
-        <!--아이디 입력란-->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
-                    "id"로 설정된 요소로 커서가 이동함-->
-                <label for="uid" class="p_label col-form-label">아이디</label>
-            </div>
-            <div class="col-auto">
-                <input type="text" id="uid" class="form-control" placeholder="아이디"/>
-            </div>
-        </div>
-        
-        <!--현재 암호 입력란-->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
-                    "id"로 설정된 요소로 커서가 이동함-->
-                <label for="upw1" class="p_label col-form-label">현재 암호</label>
-            </div>
-            <div class="col-auto">
-                <input type="password" id="upw1" class="form-control" placeholder="현재 암호"/>
-            </div>
         </div>
 
-        <!--현재 암호 확인 입력란-->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <label for="upw2" class="p_label col-form-label">현재 암호 확인</label>
-            </div>
-            <div class="col-auto">
-                <input type="password" id="upw2" class="form-control" placeholder="현재 암호 확인"/>
-            </div>
-        </div>
-
-        <!--변경할 암호-->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
+        <!-- body(아이디, 암호 등 입력란) -->
+        <div class="row" style="padding:20px;">
+            <!--아이디 입력란-->
+            <div class="row g-2 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
                     "id"로 설정된 요소로 커서가 이동함-->
-                <label for="chpw" class="p_label col-form-label">변경할 암호</label>
+                    <label for="uid" class="col-form-label">아이디</label>
+                    <input type="text" id="uid" class="form-control" placeholder="아이디" />
+                </div>
             </div>
-            <div class="col-auto">
-                <input type="password" id="chpw" class="form-control" placeholder="변경할 암호"/>
+
+            <!--현재 암호 입력란-->
+            <div class="row g-2 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                    "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="upw1" class="col-form-label">현재 암호</label>
+                    <input type="password" id="upw1" class="form-control" placeholder="현재 암호" />
+                </div>
             </div>
-        </div>
-        
-        <!--버튼(암호변경, 홈으로)-->
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto" style="margin: 30px auto 0 auto;">
+
+            <!--현재 암호 확인 입력란-->
+            <div class="row g-2 align-items-center margin_bm10">
+                <div class="col">
+                    <label for="upw2" class="col-form-label">현재 암호 확인</label>
+                    <input type="password" id="upw2" class="form-control" placeholder="현재 암호 확인" />
+                </div>
+            </div>
+
+            <!--변경할 암호-->
+            <div class="row g-2 align-items-center margin_bm10">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                    "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="chpw" class="p_label col-form-label">변경할 암호</label>
+                    <input type="password" id="chpw" class="form-control" placeholder="변경할 암호" />
+                </div>
+            </div>
+
+            <!--버튼(암호변경, 홈으로)-->
+            <div class="row g-2 d-grid gap-2">
                 <button onclick="updatepwAction()" class="btn btn-primary">암호변경</button>
-                <a href="home.html" class="btn btn-secondary">홈으로</a>
+                <a href="home.html" class="btn btn-secondary">홈으로</a>    
+                </div>
             </div>
+
+
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -125,15 +115,17 @@
 
             let token = sessionStorage.getItem('token');
             const url = `http://ihongss.com:13000/api/member/updatepw.json`;
-            const headers = {"auth":token, "Content-Type":"application/json"};
-            const body = {password : upw1.value , 
-                            password1 : chpw.value };
-            const {data} = await axios.put(url, body, {headers});
+            const headers = { "auth": token, "Content-Type": "application/json" };
+            const body = {
+                password: upw1.value,
+                password1: chpw.value
+            };
+            const { data } = await axios.put(url, body, { headers });
 
-            if(data.status === 200) {
+            if (data.status === 200) {
                 alert('암호를 변경하였습니다.');
 
-                window.location.href="home.html";
+                window.location.href = "home.html";
 
             } else {
                 alert('암호 변경에 실패하였습니다.')
@@ -145,4 +137,5 @@
 
 
 </body>
+
 </html>

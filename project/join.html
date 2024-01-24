@@ -10,13 +10,13 @@
     <!--스타일 정의-->
     <style>
         .page_container {
-            width: 500px;
+            width: 460px;
             padding: 10px;
             margin: 200px auto;
         }
 
         .margin_bm10 {
-            margin-bottom:10px;
+            margin-bottom: 10px;
         }
     </style>
 
@@ -25,28 +25,29 @@
 <body>
     <div class="page_container shadow rounded border">
         <!-- header -->
-        <div>
-            <h3 style="display: inline-block;">회원가입</h3>
+        <div class="row">
+            <h2 class="text-center">회원가입</h2>
             <hr />
         </div>
 
         <!-- body -->
         <div class="row" style="padding:20px;">
             <!--    align-items-center: 세로정렬,   justify-content-center: 가로정렬     -->
-    
+
             <!-- 아이디 -->
-            <div class="row g-3 justify-content-center">
+            <div class="row g-2 justify-content-center">
                 <div class="col">
                     <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
                     <label for="uid" class="col-form-label">아이디</label>
-                    <input type="text" id="uid" class="form-control" onkeyup="idcheckAction()" autofocus placeholder="아이디를 입력하세요" />
+                    <input type="text" id="uid" class="form-control" onkeyup="idcheckAction()" autofocus
+                        placeholder="아이디를 입력하세요" />
                     <div id="idcheck"></div>
                 </div>
             </div>
 
             <!-- 암호 -->
-            <div class="row g-3 justify-content-center">
+            <div class="row g-2 justify-content-center">
                 <div class="col">
                     <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
@@ -56,7 +57,7 @@
             </div>
 
             <!-- 암호확인 -->
-            <div class="row g-3 justify-content-center">
+            <div class="row g-2 justify-content-center">
                 <div class="col">
                     <label for="upw2" class="col-form-label">암호확인</label>
                     <input type="password" id="upw2" class="form-control" placeholder="암호를 입력하세요" />
@@ -64,7 +65,7 @@
             </div>
 
             <!-- 이름 -->
-            <div class="row g-3 justify-content-center">
+            <div class="row g-2 justify-content-center">
                 <div class="col">
                     <label for="uname" class="col-form-label">이름</label>
                     <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
@@ -76,7 +77,7 @@
             </div>
 
             <!-- 이메일 -->
-            <div class="row g-3 justify-content-center">
+            <div class="row g-2 justify-content-center">
                 <div class="col">
                     <label for="uemail1" class="col-form-label">이메일</label>
                     <div class="input-group">
@@ -89,31 +90,15 @@
                         </select>
                     </div>
                 </div>
-               
-                
             </div>
         </div>
 
-        <!-- menu -->
-        <div>
-
+        <!-- 버튼 -->
+        <div style="padding:20px;" class="row g-2 d-grid gap-2">
+            <button class="btn btn-primary" onclick="joinAction()">회원가입</button>
+            <a href="home.html" class="btn btn-primary">홈으로</a>
         </div>
 
-    </div>
-
-    <div>
-        <!-- 키 눌렀다가 때었을 때(onkeyup) 아이디의 중복검사를 함 -->
-        
-        
-        <!-- <input type="password" id="upw1" placeholder="암호" /><br />
-        <input type="password" id="upw2" placeholder="암호확인" /><br /> -->
-        <input type="text" id="uname" placeholder="이름" /><br />
-        <input type="number" id="uage" placeholder="나이" /><br />
-        <input type="text" id="uemail1" placeholder="이메일" /><br />
-        
-        
-        <button onclick="joinAction()">회원가입</button>
-        <a href="home.html"><button>홈으로</button></a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -185,8 +170,8 @@
                         uemail1.focus()
                     }
                 });
-            } 
-            
+            }
+
             // 유효성 검사 모두 통과 시
             else {
 

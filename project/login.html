@@ -8,59 +8,67 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
         .page_container {
-            width: 400px;
+            width: 460px;
             padding: 10px;
             margin: 200px auto;
         }
 
-        .margin_bm {
-            margin-bottom: 35px;
+        .m-bm {
+            margin-bottom: 20px;
         }
 
-        .margin_tp {
-            margin-top: 10px auto;
+        .m-tp {
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
     <!--전체 프레임-->
-    <div class="page_container shadow rounded border">
+    <div class="container page_container shadow rounded border">
 
         <!--header(제목 및 구분선)-->
         <div class="row">
-            <h2 class="text-center">Login</h2>
-            <hr />
+            <div>
+                <h2 class="text-center">Login</h2>
+                <hr />
+            </div>
         </div>
 
         <!-- body(아이디, 암호 등 입력란) -->
         <div class="row" style="padding:20px;">
-            <!-- 아이디 -->
-            <div class="row g-2 justify-content-center">
-                <div class="col">
-                    <!--클릭 시 label의 for="id"에 의해
-                            "id"로 설정된 요소로 커서가 이동함-->
-                    <label for="uid" class="col-form-label">아이디</label>
-                    <input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" />
-                </div>
-            </div>
-            <!-- 암호 -->
-            <div class="row g-2 justify-content-center margin_bm">
-                <div class="col">
-                    <!--클릭 시 label의 for="id"에 의해
-                            "id"로 설정된 요소로 커서가 이동함-->
-                    <label for="upw" class="col-form-label">암호</label>
-                    <input type="password" id="upw" class="form-control" placeholder="암호를 입력하세요" />
-                </div>
-            </div>
 
+                <!-- 아이디 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                        <label for="uid" class="col-form-label">아이디</label>
+                        <input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" />
+                    </div>
+                </div>
 
-            <div class="row g-2 d-grid gap-2">
-                <button class="btn btn-primary" type="button" onclick="loginAction()">로그인</button>
-                <a href="join.html" class="btn btn-primary">회원가입</a>
-                <a href="home.html" class="btn btn-primary">홈으로</a>
-            </div>
+                <!-- 암호 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                        <label for="upw" class="col-form-label">암호</label>
+                        <input type="password" id="upw" class="form-control" placeholder="암호를 입력하세요" />
+                    </div>
+                </div>
+
+                <!-- 버튼 -->
+                <div class="row m-tp">
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-primary" type="button" onclick="loginAction()">로그인</button>
+                        <a href="join.html" class="btn btn-primary">회원가입</a>
+                        <a href="home.html" class="btn btn-primary">홈으로</a>
+                    </div>
+                </div>
+
         </div>
+    </div>
 
 
     </div>
@@ -101,7 +109,7 @@
                     _id: `${uid.value}`,
                     password: `${upw.value}`
                 };
-                const { data } = await axios.post(url, body, {headers});
+                const { data } = await axios.post(url, body, { headers });
                 console.log(data);
 
                 if (data.status === 200) {

@@ -8,12 +8,12 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <style>
         .page_container {
-            width: 700px;
-            padding: 20px;
-            margin: 30px auto;
+            width: 430px;
+            padding: 10px;
+            margin: 200px auto;
         }
 
-        .margin_bm10 {
+        .m-bm {
             margin-bottom: 10px;
         }
 
@@ -25,55 +25,54 @@
 
 <body>
     <!--전체 프레임-->
-    <div class="page_container shadow rounded border border-success">
+    <div class="page_container shadow rounded border">
 
+        <!-- header -->
         <!--제목 및 구분선-->
-        <h3>회원탈퇴10</h3>
-        <hr />
-
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
-                        "id"로 설정된 요소로 커서가 이동함-->
-                <label for="" style="width:80px;" class="col-form-label">이름</label>
-            </div>
-            <div class="col-auto">
-                <input type="text" id="id" class="form-control" placeholder="이름" />
-            </div>
+        <div class="row">
+            <h2 class="text-center">회원탈퇴</h2>
+            <hr />
         </div>
 
+        <!-- body -->
+        <div class="row" style="padding:20px;">
 
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
-                        "id"로 설정된 요소로 커서가 이동함-->
-                <label for="id" style="width:80px;" class="col-form-label">아이디</label>
+            <!-- 이름 -->
+            <div class="row g-2 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="uname" style="width:80px;" class="col-form-label">이름</label>
+                    <input type="text" id="uname" class="form-control" placeholder="이름" />
+                </div>
             </div>
-            <div class="col-auto">
-                <input type="text" id="id" class="form-control" placeholder="아이디를 입력하세요" />
+
+            <!-- 아이디 -->
+            <div class="row g-2 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="uid" style="width:80px;" class="col-form-label">아이디</label>
+                    <input type="text" id="uid" class="form-control" placeholder="아이디" />
+                </div>
             </div>
-        </div>
 
-
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto">
-                <!--클릭 시 label의 for="id"에 의해
-                        "id"로 설정된 요소로 커서가 이동함-->
-                <label for="password" style="width:80px;" class="col-form-label">암호</label>
+            <!-- 암호 -->
+            <div class="row g-2 justify-content-center m-bm">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="uid" style="width:80px;" class="col-form-label">암호</label>
+                    <input type="passwor5d" id="upw" class="form-control" placeholder="암호" />
+                </div>
             </div>
-            <div class="col-auto">
-                <input type="password" id="password" class="form-control" placeholder="암호를 입력하세요" />
-            </div>
-        </div>
 
-
-        <div class="row g-3 align-items-center margin_bm10">
-            <div class="col-auto" style="margin: 30px auto 0 auto;">
+             <!-- 버튼 -->
+             <div style="padding:5px;" class="row g-2 d-grid gap-3">
                 <button onclick="deleteAction()" class="btn btn-primary">회원탈퇴</button>
-                <a href="home.html" class="btn btn-secondary">홈으로</a>
+                <a href="home.html" class="btn btn-primary">홈으로</a>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
