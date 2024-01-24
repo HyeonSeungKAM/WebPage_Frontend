@@ -10,13 +10,17 @@
     <!--스타일 정의-->
     <style>
         .page_container {
-            width: 460px;
+            width: 420px;
             padding: 10px;
             margin: 200px auto;
         }
 
-        .margin_bm10 {
-            margin-bottom: 10px;
+        .m-bm {
+            margin-bottom: 20px;
+        }
+
+        .m-tp {
+            margin-top: 20px;
         }
     </style>
 
@@ -26,8 +30,10 @@
     <div class="page_container shadow rounded border">
         <!-- header -->
         <div class="row">
-            <h2 class="text-center">회원가입</h2>
-            <hr />
+            <div>
+                <h2 class="text-center">회원가입</h2>
+                <hr />
+            </div>
         </div>
 
         <!-- body -->
@@ -35,7 +41,7 @@
             <!--    align-items-center: 세로정렬,   justify-content-center: 가로정렬     -->
 
             <!-- 아이디 -->
-            <div class="row g-2 justify-content-center">
+            <div class="row m-bm">
                 <div class="col">
                     <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
@@ -47,7 +53,7 @@
             </div>
 
             <!-- 암호 -->
-            <div class="row g-2 justify-content-center">
+            <div class="row m-bm">
                 <div class="col">
                     <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
@@ -57,15 +63,15 @@
             </div>
 
             <!-- 암호확인 -->
-            <div class="row g-2 justify-content-center">
+            <div class="row m-bm">
                 <div class="col">
                     <label for="upw2" class="col-form-label">암호확인</label>
                     <input type="password" id="upw2" class="form-control" placeholder="암호를 입력하세요" />
                 </div>
             </div>
 
-            <!-- 이름 -->
-            <div class="row g-2 justify-content-center">
+            <!-- 이름, 나이 -->
+            <div class="row m-bm">
                 <div class="col">
                     <label for="uname" class="col-form-label">이름</label>
                     <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
@@ -77,14 +83,14 @@
             </div>
 
             <!-- 이메일 -->
-            <div class="row g-2 justify-content-center">
+            <div class="row m-bm">
                 <div class="col">
                     <label for="uemail1" class="col-form-label">이메일</label>
                     <div class="input-group">
-                        <input type="text" id="uemail1" class="form-control" placeholder="이메일을 입력하세요" />
+                        <input type="text" id="uemail1" class="form-control" placeholder="이메일 입력" />
                         <div class="input-group-text">@</div>
                         <select class="form-select" id="uemail2">
-                            <option value="이메일을 선택해주세요">이메일을 선택해주세요</option>
+                            <option value="이메일을 선택해주세요">이메일 선택</option>
                             <option value="gmail.com">gmail.com</option>
                             <option value="naver.com">naver.com</option>
                         </select>

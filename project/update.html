@@ -1,85 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>정보변경3</title>
+    <title>회원정보 변경</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+
+    <style>
+        .page_container {
+            width: 420px;
+            padding: 10px;
+            margin: 200px auto;
+        }
+
+        .m-bm {
+            margin-bottom: 20px;
+        }
+
+        .m-tp {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <div>
-        <div>
-            <label>이름</label>
-            <input type="text" id="uname" placeholder="이름" autofocus />
+    <!-- container -->
+    <div class="page_container shadow rounded border">
+
+        <!-- header -->
+        <div class="row">
+            <div>
+                <h2 class="text-center">회원정보 변경</h2>
+                <hr />
+            </div>
         </div>
-        
-        <div>
-            <label>이메일</label>
-            <input type="text" id="email" placeholder="이메일" />
-            <label>@</label>
-            <select id="email1">
-                <option value="이메일선택">이메일선택</option>
-                <option value="daum.net">daum.net</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="naver.com">naver.com</option>
-            </select>
+
+        <!-- body -->
+        <div class="row" style="padding:20px;">
+            <!-- 이름, 나이 -->
+            <div class="row m-bm">
+                <div class="col">
+                    <label for="uname" class="col-form-label" autofocus>이름</label>
+                    <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
+                </div>
+                <div class="col">
+                    <label for="uage" class="col-form-label">나이</label>
+                    <input type="number" id="uage" class="form-control" placeholder="나이를 입력하세요" />
+                </div>
+            </div>
+
+            <!-- 이메일 -->
+            <div class="row m-bm">
+                <div class="col">
+                    <label for="uemail1" class="col-form-label">이메일</label>
+                    <div class="input-group">
+                        <input type="text" id="uemail1" class="form-control" placeholder="이메일 입력" />
+                        <div class="input-group-text">@</div>
+                        <select class="form-select" id="uemail2">
+                            <option value="이메일을 선택해주세요">이메일 선택</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="naver.com">naver.com</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <div style="padding:20px;" class="row g-2 d-grid gap-2">
+                <button class="btn btn-primary" onclick="updateAction()">회원정보 변경</button>
+                <a href="home.html" class="btn btn-primary">홈으로</a>
+            </div>
+
+
         </div>
-    
-        <div>
-            <label>나이</label>
-            <input type="text" id="age" placeholder="나이" />
-        </div>
-        <button onclick="updateAction()">정보변경</button>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
 
         // 이전 정보 불러오기
         async function memberinfo() {
             let token = sessionStorage.getItem('token');
             const url = `http://ihongss.com:13000/api/member/selectone.json`;
-            const headers = {"auth":token, "Content-Type":"application/json"};
-            const {data} = await axios.get(url, {headers});
+            const headers = { "auth": token, "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
 
             let prev_info = data.result;
 
             console.log(data);
             console.log(prev_info);
-            
+
             uname.value = prev_info.name;
 
-            email.value = prev_info.email.split('@')[0];
-            email1.value = prev_info.email.split('@')[1];
+            uemail1.value = prev_info.email.split('@')[0];
+            uemail2.value = prev_info.email.split('@')[1];
 
-            age.value = prev_info.age;    
-        } 
+            uage.value = prev_info.age;
+        }
         memberinfo();
 
         async function updateAction() {
             let token = sessionStorage.getItem('token');
             const url = `http://ihongss.com:13000/api/member/update.json`;
-            const headers = {"auth":token,"Content-Type":"application/json"};
+            const headers = { "auth": token, "Content-Type": "application/json" };
             const body = {
-                name : `${uname.value}`,
-                email : `${email.value}@${email1.value}`,
-                age : `${age.value}`
-                 
+                name: `${uname.value}`,
+                email: `${uemail1.value}@${uemail2.value}`,
+                age: `${uage.value}`
+
             };
-            const {data} = await axios.put(url, body, {headers});
+            const { data } = await axios.put(url, body, { headers });
 
-            if(data.status === 200) {
-                alert('정보를 변경하였습니다.');
+            if (data.status === 200) {
 
-                window.location.href="home.html";
+                Swal.fire({
+                    icon: "success",
+                    title: "회원정보 변경 성공",
+                    text: "회원정보를 변경하였습니다.",
+                    didClose: () => { //창이 닫힐 때, 
+                        window.location.href = "home.html";
+                    }
+                });
 
             } else {
-                alert('정보 변경에 실패하였습니다.')
+                Swal.fire({
+                    icon: "error",
+                    title: "회원정보 변경 실패",
+                    text: "회원정보 변경에 실패하였습니다.",
+                });
             }
 
         }
-       
+
     </script>
 
 </body>
+
 </html>
