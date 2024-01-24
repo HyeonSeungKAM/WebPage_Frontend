@@ -181,7 +181,7 @@
 
             //3. 받은 정보를 화면에 표시
             _id.innerHTML += data.result._id;
-            title.innerHTML += `<h3><b>${data.result.title}</b></h3>`;
+            title.innerHTML += `<b>${data.result.title}</b>`;
             content.innerHTML += data.result.content;
             writer.innerHTML += data.result.writer;
             hit.innerHTML += data.result.hit;
@@ -205,6 +205,7 @@
 
 
         // 특정 게시글의 댓글(답글) 불러오기
+        // (댓글 불러오기 함수 : 수업때는 함수 이름을 selectBoardReply로 지정)
         async function getComment() {
             // brd는 게시글의 id값
             const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
@@ -224,7 +225,7 @@
                         `</tr>` +
                         `<tr>` +
                         `<td style="width:250px;">( ${tmp.regdate2} )</td>` +
-                        `</tr>` + 
+                        `</tr>` +
                         `<tr><td colspan='3'><hr /></td></tr>`;
                 }
             } else {
@@ -259,7 +260,6 @@
 
         // 게시물 삭제
         async function deletePage() {
-
             Swal.fire({
                 title: "해당 게시글을 삭제할까요?",
                 text: "삭제 시 해당 게시글은 복구가 불가능합니다",
@@ -311,15 +311,53 @@
 
         // 댓글 작성 함수
         async function writeComment() {
-            const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
-            const headers = { "Content-Type": "application/json" };
-            const body = {
-                brd: `${no}`, // 게시글 번호 
-                content: c_content.value,// 답글내용
-                writer: c_writer.value //답글작성자
+
+            // 유효성 검사 (입력란 공백여부 검사)
+            if (c_writer.value.length <= 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "입력오류",
+                    text: "댓글 작성자 이름을 입력하세요",
+                    didClose: () => { //창이 닫힐 때, 
+                        title.focus()
+                    }
+                });
             }
-            const { data } = await axios.post(url, body, { headers });
-            window.location.reload();
+            else if (c_content.value.length <= 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "입력오류",
+                    text: "댓글 내용을 1자이상 입력하세요",
+                    didClose: () => { //창이 닫힐 때, 
+                        uname.focus()
+                    }
+                });
+            }
+            // 유효성 검사 모두 통과 시
+            else {
+
+                const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
+                const headers = { "Content-Type": "application/json" };
+                const body = {
+                    brd: `${no}`, // 게시글 번호 
+                    content: c_content.value,// 답글내용
+                    writer: c_writer.value //답글작성자
+                }
+                const { data } = await axios.post(url, body, { headers });
+
+                if (data.status === 200) {
+                    window.location.reload();
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "댓글 생성 실패",
+                        didClose: () => { //창이 닫힐 때, 
+                            window.location.href = `boardcontent.html?no=${no}`;
+                        }
+                    });
+                }
+
+            }
         };
 
 

@@ -10,9 +10,9 @@
     <!--스타일 정의-->
     <style>
         .page_container {
-            width:700px;
-            padding:20px;
-            margin:30px auto;
+            width: 500px;
+            padding: 10px;
+            margin: 200px auto;
         }
 
         .margin_bm10 {
@@ -23,29 +23,74 @@
 </head>
 
 <body>
-    <div class="page_container shadow rounded border border-success">
+    <div class="page_container shadow rounded border">
         <!-- header -->
         <div>
-            <img src="images/tree.jpg" style="width:80px; height:50px;"/>
-            <h3 style="display: inline-block;">회원가입10</h3>
+            <h3 style="display: inline-block;">회원가입</h3>
             <hr />
         </div>
 
         <!-- body -->
-        <div>
+        <div class="row" style="padding:20px;">
             <!--    align-items-center: 세로정렬,   justify-content-center: 가로정렬     -->
-
+    
             <!-- 아이디 -->
-            <div class="row g-3 align-items-center justify-content-center margin_bm10">
-                <div class="col-auto">
-                    <label for="uid" style="width:80px;"class="col-form-label">아이디</label>
+            <div class="row g-3 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="uid" class="col-form-label">아이디</label>
+                    <input type="text" id="uid" class="form-control" onkeyup="idcheckAction()" autofocus placeholder="아이디를 입력하세요" />
+                    <div id="idcheck"></div>
                 </div>
-                <div class="col-auto">
-                    <input type="text" id="uid" placeholder="아이디" onkeyup="idcheckAction()" autofocus />
+            </div>
+
+            <!-- 암호 -->
+            <div class="row g-3 justify-content-center">
+                <div class="col">
+                    <!--클릭 시 label의 for="id"에 의해
+                            "id"로 설정된 요소로 커서가 이동함-->
+                    <label for="upw1" class="col-form-label">암호</label>
+                    <input type="password" id="upw1" class="form-control" placeholder="암호를 입력하세요" />
                 </div>
-                <div class="col-auto">
-                    <label id="idcheck">중복확인</label><br />
+            </div>
+
+            <!-- 암호확인 -->
+            <div class="row g-3 justify-content-center">
+                <div class="col">
+                    <label for="upw2" class="col-form-label">암호확인</label>
+                    <input type="password" id="upw2" class="form-control" placeholder="암호를 입력하세요" />
                 </div>
+            </div>
+
+            <!-- 이름 -->
+            <div class="row g-3 justify-content-center">
+                <div class="col">
+                    <label for="uname" class="col-form-label">이름</label>
+                    <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
+                </div>
+                <div class="col">
+                    <label for="uage" class="col-form-label">나이</label>
+                    <input type="number" id="uage" class="form-control" placeholder="나이를 입력하세요" />
+                </div>
+            </div>
+
+            <!-- 이메일 -->
+            <div class="row g-3 justify-content-center">
+                <div class="col">
+                    <label for="uemail1" class="col-form-label">이메일</label>
+                    <div class="input-group">
+                        <input type="text" id="uemail1" class="form-control" placeholder="이메일을 입력하세요" />
+                        <div class="input-group-text">@</div>
+                        <select class="form-select" id="uemail2">
+                            <option value="이메일을 선택해주세요">이메일을 선택해주세요</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="naver.com">naver.com</option>
+                        </select>
+                    </div>
+                </div>
+               
+                
             </div>
         </div>
 
@@ -60,17 +105,13 @@
         <!-- 키 눌렀다가 때었을 때(onkeyup) 아이디의 중복검사를 함 -->
         
         
-        <input type="password" id="upw1" placeholder="암호" /><br />
-        <input type="password" id="upw2" placeholder="암호확인" /><br />
+        <!-- <input type="password" id="upw1" placeholder="암호" /><br />
+        <input type="password" id="upw2" placeholder="암호확인" /><br /> -->
         <input type="text" id="uname" placeholder="이름" /><br />
         <input type="number" id="uage" placeholder="나이" /><br />
         <input type="text" id="uemail1" placeholder="이메일" /><br />
-        <label>@</label>
-        <select id="uemail2">
-            <option value="이메일을 선택해주세요">이메일을 선택해주세요</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="naver.com">naver.com</option>
-        </select>
+        
+        
         <button onclick="joinAction()">회원가입</button>
         <a href="home.html"><button>홈으로</button></a>
     </div>
@@ -204,15 +245,14 @@
 
                 // 같을 경우 result는 1 다를 경우(서버에 없는 경우) reuslt는 0이다.
                 if (data.result === 1) {
-                    idcheck.innerHTML = '사용불가';
+                    idcheck.innerHTML = '<br/><div class="alert alert-danger" role="alert">본 아이디는 사용 불가능합니다!</div>';
 
                 } else if (data.result === 0) {
-                    idcheck.innerHTML = '사용가능';
+                    idcheck.innerHTML = '<br/><div class="alert alert-success" role="alert">본 아이디는 사용 가능합니다!</div>';
                 }
 
-
             } else {
-                idcheck.innerHTML = '중복확인'
+                idcheck.innerHTML = '';
             }
         }
     </script>

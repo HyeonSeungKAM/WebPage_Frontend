@@ -110,6 +110,15 @@
             text = '';
         }
 
+        // 답글 갯수 조회
+        async function commentNum(brd) {
+
+
+            comments.innerHTML = `<p>${data.total}</p>`
+
+        };
+
+
 
         // 게시물 데이터 불러오기 
         async function boardList() {
@@ -119,16 +128,38 @@
             console.log(data); // 
 
             let rows = data.rows;
+
             for (let tmp of rows) {
-                //tbody에 추가
-                tbody.innerHTML +=
-                    `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
-                    `<td>${tmp._id}</td>` +
-                    `<td>${tmp.title.substr(0, 10)}</td>` +
-                    `<td>${tmp.writer.substr(0, 4)}</td>` +
-                    `<td>${tmp.hit}</td>` +
-                    `<td>${tmp.regdate2}</td>` +
-                    `</tr>`;
+
+                // 반복문 내 댓글 개수를 불러오는 코드 생성 
+                // 반복문으로 data의 rows 내의 게시글 id값들을 차례대로 불러와 그대로 댓글 갯수 정보를 확인하는 url에 삽입.
+                
+                const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=${tmp._id}`;
+                const headers = { "Content-Type": "application/json" };
+                let { data } = await axios.get(url, { headers });
+                console.log("댓글 개수", data.total);
+
+                if (data.total === 0) {
+                    //tbody에 추가
+                    tbody.innerHTML +=
+                        `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
+                        `<td>${tmp._id}</td>` +
+                        `<td>${tmp.title.substr(0, 10)}</td>` +
+                        `<td>${tmp.writer.substr(0, 4)}</td>` +
+                        `<td>${tmp.hit}</td>` +
+                        `<td>${tmp.regdate2}</td>` +
+                        `</tr>`;
+                } else {
+                     //tbody에 추가
+                     tbody.innerHTML +=
+                        `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
+                        `<td>${tmp._id}</td>` +
+                        `<td>${tmp.title.substr(0, 10)} [${data.total}]</td>` +
+                        `<td>${tmp.writer.substr(0, 4)}</td>` +
+                        `<td>${tmp.hit}</td>` +
+                        `<td>${tmp.regdate2}</td>` +
+                        `</tr>`;
+                }
             }
 
             // 페이지네이션
@@ -162,15 +193,17 @@
             const body = {};
             const { data } = await axios.put(url, body, { headers });
 
-            if(data.status === 200) {
+            if (data.status === 200) {
 
                 window.location.href = `boardcontent.html?no=${no}`;
                 //2. 게시글 상세 페이지 이동
             }
 
             // 상세화면으로 이동
-           
+
         }
+
+
 
 
     </script>
