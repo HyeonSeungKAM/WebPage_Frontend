@@ -10,10 +10,33 @@
 
     <!--스타일 정의-->
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 900px;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+        }
+
         .board_container {
             width: 800px;
             padding: 20px;
             margin: 30px auto 0px auto;
+            background-color: white;
+
         }
 
         .margin20 {
@@ -23,53 +46,54 @@
 </head>
 
 <body>
-    <!--전체 프레임-->
-    <div class="shadow board_container">
-        <!--페이지 제목-->
-        <h3>글쓰기</h3>
-        <hr />
+    <div class="background rounded shadow">
+        <!--전체 프레임-->
+        <div class="shadow rounded board_container">
+            <!--페이지 제목-->
+            <h3>글쓰기</h3>
+            <hr />
 
-        <!--제목-->
-        <div class="row g-3 align-items-center margin20">
-            <div class="col-auto">
-                <label for="title" style="width:80px;" class="col-form-label">제목</label>
+            <!--제목-->
+            <div class="row g-3 align-items-center margin20">
+                <div class="col-auto">
+                    <label for="title" style="width:80px;" class="col-form-label">제목</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="title" class="form-control" placeholder="제목" />
+                </div>
             </div>
-            <div class="col-auto">
-                <input type="text" id="title" class="form-control" placeholder="제목" />
-            </div>
-        </div>
 
 
-        <!--내용-->
-        <div class="row g-3 align-items-start margin20">
-            <div class="col-auto">
-                <label for="content" style="width:80px;" class="col-form-label">내용</label>
+            <!--내용-->
+            <div class="row g-3 align-items-start margin20">
+                <div class="col-auto">
+                    <label for="content" style="width:80px;" class="col-form-label">내용</label>
+                </div>
+                <div class="col-auto">
+                    <div id="editor" class="form-control" style="height:300px; width:100%;">
+                    </div>
+                </div>
             </div>
-            <div class="col-auto">
-                <div id="editor" class="form-control" style="height:300px; width:100%;">
+
+            <!--작성자-->
+            <div class="row g-3 align-items-center margin20">
+                <div class="col-auto">
+                    <label for="writer" style="width:80px;" class="col-form-label">작성자</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="writer" class="form-control" placeholder="작성자" />
+                </div>
+            </div>
+
+
+            <!--버튼 구성-->
+            <div class="row g-3 align-items-center margin20">
+                <div class="col-auto" style="margin: 30px auto 0 auto;">
+                    <button onclick="writeBoard()" class="btn btn-primary">글쓰기</button>
+                    <a href="board.html" class="btn btn-secondary">목록</a>
                 </div>
             </div>
         </div>
-
-        <!--작성자-->
-        <div class="row g-3 align-items-center margin20">
-            <div class="col-auto">
-                <label for="writer" style="width:80px;" class="col-form-label">작성자</label>
-            </div>
-            <div class="col-auto">
-                <input type="text" id="writer" class="form-control" placeholder="작성자" />
-            </div>
-        </div>
-
-
-        <!--버튼 구성-->
-        <div class="row g-3 align-items-center margin20">
-            <div class="col-auto" style="margin: 30px auto 0 auto;">
-                <button onclick="writeBoard()" class="btn btn-primary">글쓰기</button>
-                <a href="board.html" class="btn btn-secondary">목록</a>
-            </div>
-        </div>
-    </div>
 
     </div>
 

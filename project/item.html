@@ -8,10 +8,33 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
 
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 100%;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+        }
+
         .page_container {
-            width: 900px;
+            width: 1200px;
+            height: 100%;
             padding: 20px;
-            margin: 20px auto 0px auto;
+            margin: 30px auto 0px auto;
+            background-color: white;
         }
 
         .margin {
@@ -31,66 +54,83 @@
 </head>
 
 <body>
-    <div class="board_container shadow">
+    <!-- 배경화면 공간 -->
+    <div class="background rounded shadow">
+        <!-- 데이터 공간 -->
+        <div class="page_container shadow">
+            <!--페이지 제목-->
+            <div class="margin">
+                <!-- <h3>물품관리</h3> -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">홈으로</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="board.html">게시판</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-disabled="true" href="memberlist.html">회원목록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">쇼핑몰</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-disabled="true">물품관리</a>
+                    </li>
+                </ul>
+            </div>
 
-        <!--페이지 제목-->
-        <div class="margin">
-            <h3>물품관리</h3>
-        </div>
 
-    
-        <!--버튼 및 검색란-->
-        <div class="row g-3 d-flex justify-content-between margin">
-            <div class="col-auto">
-                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="home.html"><button class="btn btn-danger">홈으로</button></a>
-                    <a href="updateitem.html"><button class="btn btn-danger">물품등록</button></a>
-                    <a href="board.html"><button class="btn btn-danger">게시판</button></a>
-                    <a href="memberlist.html"><button class="btn btn-danger">회원목록</button></a>
-                    <a href="update.html"><button class="btn btn-danger">회원정보 변경</button></a>
-                    <a href="updatepw.html"><button class="btn btn-danger">암호변경</button></a>
-                    <a href="shop.html"><button class="btn btn-danger">쇼핑몰</button></a>
+            <!--버튼 및 검색란-->
+            <div class="row g-3 d-flex justify-content-between margin">
+                <div class="col-auto">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="addItem.html"><button class="btn btn-danger">물품등록</button></a>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <!-- 검색 기능 -->
+                    <form action="item.html" method="get">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <input type="hidden" name="page" value="1" />
+                                <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">검색</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-            <div class="col-auto">
-                <!-- 검색 기능 -->
-                <form action="item.html" method="get">
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            <input type="hidden" name="page" value="1" />
-                            <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">검색</button>
-                        </div>
-                    </div>
-                </form>
+            <!-- 목록 -->
+            <div class="margin">
+                <table class="table table-striped" style="text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:90px;">물품번호</th>
+                            <th style="width:100px;">이미지</th>
+                            <th>물품명</th>
+                            <th>물품내용</th>
+                            <th style="width:100px;">물품가격</th>
+                            <th style="width:100px;">물품수량</th>
+                            <th style="width:180px;">등록일</th>
+                            <th style="width:70px;"></th>
+                            <th style="width:70px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
             </div>
-        </div>
 
-        <!-- 목록 -->
-        <div class="margin">
-            <table class="table table-striped" style="text-align:center;">
-                <thead>
-                    <tr>
-                        <th style="width:90px;">물품번호</th>
-                        <th style="width:100px;">이미지</th>
-                        <th>물품명</th>
-                        <th>물품내용</th>
-                        <th style="width:100px;">물품가격</th>
-                        <th style="width:100px;">물품수량</th>
-                        <th style="width:180px;">등록일</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody"></tbody>
-            </table>
-        </div>
-
-        <!--페이지네이션-->
-        <div class="row justify-content-center g-3 margin">
-            <div class="col-auto">
-                <ul class="pagination" id="pagination-demo"></ul>
+            <!--페이지네이션-->
+            <div class="row justify-content-center g-3 margin">
+                <div class="col-auto">
+                    <ul class="pagination" id="pagination-demo"></ul>
+                </div>
             </div>
         </div>
     </div>
@@ -100,11 +140,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
     <script>
 
-        let page = 1; // 페이지번호
-        let text = ``; // 검색어
-        let cnt = 20; // 한페이지 당 개수
+
+        let cnt = 10; // 한페이지 당 개수
+
+
+        // 페이지네이션 및 검색 기능을 위한 설정
+        const urlPath = new URL(window.location.href)
+        const urlParams = urlPath.searchParams;
+
+        // 주소값의 ? 뒤의 page와 text값을 읽음.
+        let page = urlParams.get("page"); // 1 (페이지 수)
+        let text = urlParams.get("text"); // 빈 문자... (검색어)
+
+        if (page === null) {
+            page = 1;
+        }
+
+        if (text === null) {
+            text = '';
+        }
+
 
         // 자동호출
+        // 물품조회
         (async function selectItemList() {
             const url = `http://ihongss.com:13000/api/item/selectlist.json?page=${page}&text=${text}&cnt=${cnt}`;
             const headers = { "Content-Type": "application/json" };
@@ -113,7 +171,6 @@
 
             for (let tmp of data.result) {
                 tbody.innerHTML +=
-                    `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
                     `<td>${tmp._id}</td>` +
                     `<td><img src="http://ihongss.com:13000${tmp.img}" style="width:50px;"></td>` +
                     `<td>${tmp.name}</td>` +
@@ -121,6 +178,8 @@
                     `<td>${tmp.price}</td>` +
                     `<td>${tmp.quantity}</td>` +
                     `<td>${tmp.regdate1}</td>` +
+                    `<td><a href="updateItem.html?item_id=${tmp._id}"><button>수정</button></a></td>` +
+                    `<td><button onclick="deleteItem(${tmp._id})">삭제</button></td>` +
                     `</tr>`;
 
             };
@@ -138,11 +197,29 @@
                 initiateStartPageClick: false, // 페이지 로딩될때 자동 클릭 방지
                 onPageClick: function (event, page) {
                     // 페이지 네이션에서 사용자가 클릭시 반응하는 코드
-                    window.location.href = `board.html?page=${page}&${text}`;
+                    window.location.href = `item.html?page=${page}&${text}`;
                 }
             });
 
         }());
+
+
+        // 물품 삭제 기능
+        async function deleteItem(item_id) {
+            const url = `http://ihongss.com:13000/api/item/delete.json?no=${item_id}`
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.delete(url, { headers: headers, data: {} });
+            console.log(data);
+
+            if (data.status === 200) {
+                alert('물품이 삭제되었습니다')
+                window.location.reload();
+            }
+
+        };
+
+
+
     </script>
 
 

@@ -7,10 +7,35 @@
     <title>게시판</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 900px;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+        }
+
+
+
         .board_container {
             width: 1200px;
+            height: 800px;
             padding: 20px;
             margin: 30px auto;
+            background-color: white;
         }
 
         .margin {
@@ -25,60 +50,79 @@
 </head>
 
 <body>
-    <div class="board_container shadow">
 
-        <!--페이지 제목-->
-        <div class="margin">
-            <h3>게시판</h3>
-        </div>
+    <div class="background rounded shadow">
 
-        <!--버튼 및 검색란-->
-        <div class="row g-3 d-flex justify-content-between margin">
-            <div class="col-auto">
-                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
-                    <a href="boardwrite.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
+        <div class="board_container shadow">
+
+            <!-- 페이지 제목 -->
+            <div class="margin">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">홈으로</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-disabled="true">게시판</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="memberlist.html">회원목록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">쇼핑몰</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="item.html">물품관리</a>
+                    </li>
+                  </ul>
+            </div>
+
+            <!--버튼 및 검색란-->
+            <div class="row g-3 d-flex justify-content-between margin">
+                <div class="col-auto">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="boardwrite.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <!-- 검색 기능 -->
+                    <form action="board.html" method="get">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <input type="hidden" name="page" value="1" />
+                                <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">검색</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-            <div class="col-auto">
-                <!-- 검색 기능 -->
-                <form action="board.html" method="get">
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            <input type="hidden" name="page" value="1" />
-                            <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">검색</button>
-                        </div>
-                    </div>
-                </form>
+            <!-- 목록 -->
+            <div class="margin">
+                <table class="table table-striped" style="text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">번호</th>
+                            <th>제목</th>
+                            <th style="width:100px;">작성자</th>
+                            <th style="width:80px;">조회수</th>
+                            <th style="width:200px;">날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
             </div>
-        </div>
 
-        <!-- 목록 -->
-        <div class="margin">
-            <table class="table table-striped" style="text-align:center;">
-                <thead>
-                    <tr>
-                        <th style="width:50px;">번호</th>
-                        <th>제목</th>
-                        <th style="width:100px;">작성자</th>
-                        <th style="width:80px;">조회수</th>
-                        <th style="width:200px;">날짜</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-
-                </tbody>
-            </table>
-        </div>
-
-        <!--페이지네이션-->
-        <div class="row justify-content-center g-3 margin">
-            <div class="col-auto">
-                <ul class="pagination" id="pagination-demo"></ul>
+            <!--페이지네이션-->
+            <div class="row justify-content-center g-3 margin">
+                <div class="col-auto">
+                    <ul class="pagination" id="pagination-demo"></ul>
+                </div>
             </div>
         </div>
     </div>
@@ -133,7 +177,7 @@
 
                 // 반복문 내 댓글 개수를 불러오는 코드 생성 
                 // 반복문으로 data의 rows 내의 게시글 id값들을 차례대로 불러와 그대로 댓글 갯수 정보를 확인하는 url에 삽입.
-                
+
                 const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=${tmp._id}`;
                 const headers = { "Content-Type": "application/json" };
                 let { data } = await axios.get(url, { headers });
@@ -150,8 +194,8 @@
                         `<td>${tmp.regdate2}</td>` +
                         `</tr>`;
                 } else {
-                     //tbody에 추가
-                     tbody.innerHTML +=
+                    //tbody에 추가
+                    tbody.innerHTML +=
                         `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
                         `<td>${tmp._id}</td>` +
                         `<td>${tmp.title.substr(0, 10)} [${data.total}]</td>` +

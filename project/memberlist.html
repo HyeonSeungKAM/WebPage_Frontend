@@ -7,10 +7,33 @@
     <title>회원목록</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 900px;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+        }
+
         .board_container {
             width: 1200px;
             padding: 20px;
             margin: 30px auto;
+            background-color: white;
+
         }
 
         .margin {
@@ -25,73 +48,75 @@
 </head>
 
 <body>
-    <div class="board_container shadow">
 
-        <!--페이지 제목-->
-        <div class="margin">
-            <h3>회원목록</h3>
-        </div>
+    <div class="background rounded shadow">
+        <div class="board_container shadow">
 
-        <!--버튼 및 검색란-->
-        <div class="row g-3 d-flex justify-content-between margin">
-            <div class="col-auto">
-                <div id="div1" class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
-                    <a href="board.html"><button type="button" class="btn btn-danger">게시판</button></a>
-                    <a href="login.html"><button type="button" class="btn btn-warning">로그인</button></a>
-                    <a href="join.html"><button type="button" class="btn btn-warning">회원가입</button></a>
-                </div>
-                <div id="div2" class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="home.html"><button type="button" class="btn btn-danger">홈으로</button></a>
-                    <a href="board.html"><button type="button" class="btn btn-danger">게시판</button></a>
-                    <a href="logout.html"><button type="button" class="btn btn-warning">로그아웃</button></a>
-                    <a href="updatepw.html"><button type="button" class="btn btn-warning">암호변경</button></a>
-                    <a href="update.html"><button type="button" class="btn btn-warning">회원정보변경</button></a>
-                    <a href="delete.html"><button type="button" class="btn btn-warning">회원탈퇴</button></a>
-                </div>
+            <!--페이지 제목-->
+            <div class="margin">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">홈으로</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link"  href="board.html" >게시판</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-disabled="true">회원목록</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="shop.html">쇼핑몰</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="item.html">물품관리</a>
+                    </li>
+                  </ul>
             </div>
 
-            <div class="col-auto">
-                <!-- 검색 기능 -->
-                <form action="memberlist.html" method="get">
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            <input type="hidden" name="page" value="1" />
-                            <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
+            <!--검색란-->
+            <div class="row g-3 d-flex justify-content-end margin">
+                <div class="col-auto">
+                    <!-- 검색 기능 -->
+                    <form action="memberlist.html" method="get">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <input type="hidden" name="page" value="1" />
+                                <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">검색</button>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">검색</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <!-- 회원목록 -->
-        <div class="margin">
-            <table  class="table table-striped">
-                <thead>
-                    <tr>
-                        <th style="width:100px;">아이디</th>
-                        <th style="width:100px;">이름</th>
-                        <th style="width:50px;">나이</th>
-                        <th style="width:200px;">이메일</th>
-                        <th style="width:200px;">등록일</th>
-                    </tr>
+            <!-- 회원목록 -->
+            <div class="margin">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:100px;">아이디</th>
+                            <th style="width:100px;">이름</th>
+                            <th style="width:50px;">나이</th>
+                            <th style="width:200px;">이메일</th>
+                            <th style="width:200px;">등록일</th>
+                        </tr>
 
-                </thead>
-                <tbody id="tbody">
-                </tbody>
-            </table>
-        </div>
-
-        <!--페이지네이션-->
-        <div class="row justify-content-center g-3 margin">
-            <div class="col-auto">
-                <ul class="pagination" id="pagination-demo"></ul>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
             </div>
-        </div>
 
+            <!--페이지네이션-->
+            <div class="row justify-content-center g-3 margin">
+                <div class="col-auto">
+                    <ul class="pagination" id="pagination-demo"></ul>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -113,23 +138,6 @@
         if (text === null) {
             text = '';
         }
-
-        // 로그인, 로그아웃 화면 구분
-        // (세션)저장소에서 토큰을 읽어봄
-        // 이유: 로그인인지 로그아웃인지 확인하기 위해서 
-        let token = sessionStorage.getItem('token');
-        console.log(token);
-
-        if (token === null) {
-            //과거에 로그인 한 적이 없음
-            div1.style.display = "block";
-            div2.style.display = "none";
-        } else {
-            //과거에 로그인 한 적이 있음
-            div1.style.display = "none";
-            div2.style.display = "block";
-        }
-
         // console.log(window); // script에서 사용할 수 있는 명령어
 
 
@@ -164,18 +172,18 @@
             console.log('memberlist', data);
 
             // status = 200일 때, 정상 
-            if (data.status === 200) { 
-                
+            if (data.status === 200) {
+
                 // 받은 데이터가 200(정상)이면
                 let arr = data.rows;    // 변수 arr에 받은 데이터의 rows를 할당
-                console.log("회원목록",arr);
+                console.log("회원목록", arr);
 
                 // arr 요소들을 tmp에 할당
                 for (let tmp of arr) {
                     tbody.innerHTML +=
                         `<tr>` +
-                        `<td>${tmp._id.substr(0,5)}</td>` +
-                        `<td>${tmp.name.substr(0,3)}</td>` +
+                        `<td>${tmp._id.substr(0, 5)}</td>` +
+                        `<td>${tmp.name.substr(0, 3)}</td>` +
                         `<td>${tmp.age}</td>` +
                         `<td>${tmp.email}</td>` +
                         `<td>${tmp.regdate2}</td>` +

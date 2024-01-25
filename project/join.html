@@ -9,10 +9,33 @@
 
     <!--스타일 정의-->
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 100%;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+
+        }
+
         .page_container {
             width: 420px;
             padding: 10px;
             margin: 200px auto;
+            background-color: white;
         }
 
         .m-bm {
@@ -27,84 +50,87 @@
 </head>
 
 <body>
-    <div class="page_container shadow rounded border">
-        <!-- header -->
-        <div class="row">
-            <div>
-                <h2 class="text-center">회원가입</h2>
-                <hr />
+
+    <div class="background rounded shadow">
+        <div class="page_container shadow rounded border">
+            <!-- header -->
+            <div class="row">
+                <div>
+                    <h2 class="text-center">회원가입</h2>
+                    <hr />
+                </div>
             </div>
-        </div>
 
-        <!-- body -->
-        <div class="row" style="padding:20px;">
-            <!--    align-items-center: 세로정렬,   justify-content-center: 가로정렬     -->
+            <!-- body -->
+            <div class="row" style="padding:20px;">
+                <!--    align-items-center: 세로정렬,   justify-content-center: 가로정렬     -->
 
-            <!-- 아이디 -->
-            <div class="row m-bm">
-                <div class="col">
-                    <!--클릭 시 label의 for="id"에 의해
+                <!-- 아이디 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
-                    <label for="uid" class="col-form-label">아이디</label>
-                    <input type="text" id="uid" class="form-control" onkeyup="idcheckAction()" autofocus
-                        placeholder="아이디를 입력하세요" />
-                    <div id="idcheck"></div>
+                        <label for="uid" class="col-form-label">아이디</label>
+                        <input type="text" id="uid" class="form-control" onkeyup="idcheckAction()" autofocus
+                            placeholder="아이디를 입력하세요" />
+                        <div id="idcheck"></div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 암호 -->
-            <div class="row m-bm">
-                <div class="col">
-                    <!--클릭 시 label의 for="id"에 의해
+                <!-- 암호 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <!--클릭 시 label의 for="id"에 의해
                             "id"로 설정된 요소로 커서가 이동함-->
-                    <label for="upw1" class="col-form-label">암호</label>
-                    <input type="password" id="upw1" class="form-control" placeholder="암호를 입력하세요" />
+                        <label for="upw1" class="col-form-label">암호</label>
+                        <input type="password" id="upw1" class="form-control" placeholder="암호를 입력하세요" />
+                    </div>
                 </div>
-            </div>
 
-            <!-- 암호확인 -->
-            <div class="row m-bm">
-                <div class="col">
-                    <label for="upw2" class="col-form-label">암호확인</label>
-                    <input type="password" id="upw2" class="form-control" placeholder="암호를 입력하세요" />
+                <!-- 암호확인 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <label for="upw2" class="col-form-label">암호확인</label>
+                        <input type="password" id="upw2" class="form-control" placeholder="암호를 입력하세요" />
+                    </div>
                 </div>
-            </div>
 
-            <!-- 이름, 나이 -->
-            <div class="row m-bm">
-                <div class="col">
-                    <label for="uname" class="col-form-label">이름</label>
-                    <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
+                <!-- 이름, 나이 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <label for="uname" class="col-form-label">이름</label>
+                        <input type="text" id="uname" class="form-control" placeholder="이름을 입력하세요" />
+                    </div>
+                    <div class="col">
+                        <label for="uage" class="col-form-label">나이</label>
+                        <input type="number" id="uage" class="form-control" placeholder="나이를 입력하세요" />
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="uage" class="col-form-label">나이</label>
-                    <input type="number" id="uage" class="form-control" placeholder="나이를 입력하세요" />
-                </div>
-            </div>
 
-            <!-- 이메일 -->
-            <div class="row m-bm">
-                <div class="col">
-                    <label for="uemail1" class="col-form-label">이메일</label>
-                    <div class="input-group">
-                        <input type="text" id="uemail1" class="form-control" placeholder="이메일 입력" />
-                        <div class="input-group-text">@</div>
-                        <select class="form-select" id="uemail2">
-                            <option value="이메일을 선택해주세요">이메일 선택</option>
-                            <option value="gmail.com">gmail.com</option>
-                            <option value="naver.com">naver.com</option>
-                        </select>
+                <!-- 이메일 -->
+                <div class="row m-bm">
+                    <div class="col">
+                        <label for="uemail1" class="col-form-label">이메일</label>
+                        <div class="input-group">
+                            <input type="text" id="uemail1" class="form-control" placeholder="이메일 입력" />
+                            <div class="input-group-text">@</div>
+                            <select class="form-select" id="uemail2">
+                                <option value="이메일을 선택해주세요">이메일 선택</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="naver.com">naver.com</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 버튼 -->
-        <div style="padding:20px;" class="row g-2 d-grid gap-2">
-            <button class="btn btn-primary" onclick="joinAction()">회원가입</button>
-            <a href="home.html" class="btn btn-primary">홈으로</a>
-        </div>
+            <!-- 버튼 -->
+            <div style="padding:20px;" class="row g-2 d-grid gap-2">
+                <button class="btn btn-primary" onclick="joinAction()">회원가입</button>
+                <a href="home.html" class="btn btn-primary">홈으로</a>
+            </div>
 
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

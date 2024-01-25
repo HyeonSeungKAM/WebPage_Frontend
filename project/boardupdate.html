@@ -10,10 +10,32 @@
 
     <!--스타일 정의-->
     <style>
+        .background {
+            position: relative;
+            width: 1300px;
+            height: 100%;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-size: cover;
+            background-image: url(images/ocean.jpg);
+            z-index: -1;
+        }
+
         .board_container {
             width: 800px;
             padding: 20px;
-            margin: 30px auto 0px auto;
+            margin: 30px auto 30px auto;
+            background-color: white;
         }
 
         .margin20 {
@@ -23,71 +45,63 @@
 </head>
 
 <body>
-    <!-- 전체 프레임 -->
-    <div class="shadow board_container">
+    <div class="background rounded shadow">
+        <!-- 전체 프레임 -->
+        <div class="shadow board_container">
 
-        <!-- header -->
-        <div class="row g-3">
-            <h3>게시글 수정 페이지</h3>
-            <hr />
-        </div>
-
-        <!-- body -->
-        <div class="row g-3 align-items-center justify-content-center">
-
-            <!-- edit space -->
+            <!-- header -->
             <div class="row g-3">
-                <!-- 글번호 및 작성날짜 -->
-                <div class="row g-2 align-items-center">
-                    <div class="col-auto input-group">
-                        <label class="input-group-text">글번호</label>
-                        <input class="form-control" type="text" id="_id" readonly />
-                        <label class="input-group-text">날짜</label>
-                        <input class="form-control" type="text" id="regdate" readonly /><br />
-                    </div>
-                </div>
+                <h3>게시글 수정 페이지</h3>
+                <hr />
+            </div>
 
-                <!--제목-->
-                <div class="row g-2 align-items-center margin20">
-                    <div class="col-auto input-group">
-                        <label for="title" style="width:80px;" class="input-group-text">제목</label>
-                        <input type="text" id="title" class="form-control" autofocus />
-                    </div>
-                    <div class="col-auto input-group">
-                        <label for="title" style="width:80px;" class="input-group-text">작성자</label>
-                        <input type="text" id="title" class="form-control" placeholder="작성자 입력해주세요." />
-                    </div>
-                </div>
+            <!-- body -->
+            <div class="row g-3 align-items-center justify-content-center">
 
-                <!--내용-->
-                <div class="row g-2 align-items-start margin20">
-                    <div class="col-auto">
-                        <div id="editor" class="form-control" style="height:300px; width:100%;">
+                <!-- edit space -->
+                <div class="row g-3">
+                    <!-- 글번호 및 작성날짜 -->
+                    <div class="row g-2 align-items-center">
+                        <div class="col-auto input-group">
+                            <label class="input-group-text">글번호</label>
+                            <input class="form-control" type="text" id="_id" readonly />
+                            <label class="input-group-text">날짜</label>
+                            <input class="form-control" type="text" id="regdate" readonly /><br />
+                        </div>
+                    </div>
+
+                    <!--제목-->
+                    <div class="row g-2 align-items-center margin20">
+                        <div class="col-auto input-group">
+                            <label for="title" style="width:80px;" class="input-group-text">제목</label>
+                            <input type="text" id="title" class="form-control" autofocus />
+                        </div>
+                        <div class="col-auto input-group">
+                            <label for="writer" style="width:80px;" class="input-group-text">작성자</label>
+                            <input type="text" id="writer" class="form-control" placeholder="작성자 입력해주세요." />
+                        </div>
+                    </div>
+
+                    <!--내용-->
+                    <div class="row g-2 align-items-start margin20">
+                        <div class="col-auto">
+                            <div id="editor" class="form-control" style="height:300px; width:100%;">
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- 버튼모음 -->
+                <div>
+                    <button class="btn btn-primary" onclick="handleUpdate()">변경</button>
+                    <button class="btn btn-secondary" onclick="pageContent()">게시글 상세화면으로</button>
+                    <a href="board.html" class="btn btn-secondary">목록</a>
+                </div>
             </div>
-
-
-
-
         </div>
-
-        <div>
-            글번호(변경 X) <br />
-            글제목(변경 O) <br />
-            글내용(변경 o) <div id="editor" style=" height: 300px"></div><br />
-            작성자(변경 O) <input type="text" id="writer" /><br />
-            조회수(변경 O) <input type="text" id="hit" readonly /><br />
-            날짜(변경 X)
-            <button onclick="handleUpdate()">변경</button>
-            <button onclick="pageContent()">게시글 상세화면으로</button>
-            <a href="board.html" class="btn btn-secondary">목록</a>
-        </div>
-
-
 
     </div>>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -140,7 +154,6 @@
             _id.value = data.result._id;
             title.value = data.result.title;
             writer.value = data.result.writer;
-            hit.value = data.result.hit;
             regdate.value = data.result.regdate2;
             quill.pasteHTML(data.result.content);
 
