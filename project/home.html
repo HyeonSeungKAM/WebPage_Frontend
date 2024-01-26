@@ -7,10 +7,22 @@
     <title>홈화면</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style>
+        
         :is(.page_container, .line_tg1, .line_tg2, .text1, .text2, .madeby, .menu_container, .user_info) {
             opacity: 0;
             animation: fadein 1s ease;
             animation-fill-mode: forwards;
+        }
+
+        :is(.line_tg1, .line_tg2) {
+            width: 10px;
+            opacity: 0;
+            animation: fadein_extend 1s ease ;
+            animation-fill-mode: forwards;
+        }
+
+        .text_container {
+            margin-left: 30px;
         }
 
         .page_container {
@@ -21,55 +33,55 @@
             margin: 30px auto;
             padding: 10px;
 
-            background-size: cover; 
+            background-size: cover;
             background-image: url(images/ocean.jpg);
+            animation-delay: 0.3s;
+
         }
 
         .line_tg1 {
             background-color: rgb(65, 64, 64);
             height: 10px;
             width: 450px;
-            animation-delay: 0.3s;
+            animation-delay: 1s;
         }
 
+        
         .text1 {
-            animation-delay: 0.5s;
+            animation-delay: 2s;
         }
 
         .text2 {
-            animation-delay: 0.7s;
+            animation-delay: 2.5s;
         }
 
         .line_tg2 {
             background-color: rgb(65, 64, 64);
             height: 10px;
             width: 450px;
-            animation-delay: 0.9s;
+            animation-delay: 1s;
         }
 
 
         .madeby {
-            margin-left: 70px;
+            margin-left: 20px;
 
-            animation-delay: 1.1s;
+            animation-delay: 3s;
         }
 
-        .text_container {
-            margin-left: 80px;
-            width: 400px;
-        }
 
         .menu_container {
             background-color: white;
             border-radius: 30px;
+            height: auto;
             padding: 0px 10px;
             margin-top: 20px;
             margin-bottom: 70px;
-            animation-delay: 1.6s;
+            animation-delay: 4.5s;
         }
 
         .user_info {
-            animation-delay: 1.3s;
+            animation-delay: 4s;
         }
 
 
@@ -78,13 +90,27 @@
             color: gray;
         }
 
+        @keyframes fadein_extend {
+            from {
+                opacity: 0;
+                width: 10px;
+            }
+
+            to {
+                opacity: 1;
+                width: 500px;
+            }
+        }
+
 
 
         @keyframes fadein {
+
             /* Safari and Chrome */
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -99,76 +125,90 @@
     <div class="container page_container shadow rounded border">
         <!-- header -->
         <div class="row">
-
-            <!-- 메뉴 프레임 (로그인 전) -->
-            <div id="div1">
-                <div class="d-flex flex-row-reverse menu_container shadow">
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="login.html">로그인</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="join.html">회원가입</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="board.html">게시판</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="item.html">물품관리</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="shop.html">쇼핑몰</a></span>
+            <div class="col">
+                <!-- 메뉴 프레임 (로그인 전) -->
+                <div id="div1">
+                    <div class="d-flex flex-row-reverse menu_container shadow">
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="login.html">로그인</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="join.html">회원가입</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="board.html">게시판</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="item.html">물품관리</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="shop.html">쇼핑몰</a></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 메뉴 프레임 (로그인 후) -->
-            <div id="div2">
-                <div class="d-flex flex-row-reverse menu_container shadow">
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="delete.html">회원탈퇴</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="memberlist.html">회원목록</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="board.html">게시판</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="item.html">물품관리</a></span>
-                    </div>
-                    <div class="p-2">
-                        <span class="border-bottom border-dark-subtle"><a href="shop.html">쇼핑몰</a></span>
-                    </div>
+                <!-- 메뉴 프레임 (로그인 후) -->
+                <div id="div2">
+                    <div class="d-flex flex-row-reverse menu_container shadow">
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="delete.html">회원탈퇴</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="memberlist.html">회원목록</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="board.html">게시판</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="item.html">물품관리</a></span>
+                        </div>
+                        <div class="p-2">
+                            <span class="border-bottom border-dark-subtle"><a href="shop.html">쇼핑몰</a></span>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Body -->
-        <div class="row text-center">
-
-            <!-- 화면 제목 -->
-            <div class="col text_container">
-                <hr class="line_tg1" />
-                <div>
-                    <p class="text1 lh-1 fw-bold fs-1 text-start">CODE HOWS</p>
-                    <p class="text2 lh-1 fw-bold fs-1 text-center">Mini Project</p>
-                </div>
-                <hr class="line_tg2" />
-                <p class="lh fw-bold fs-5 text-start madeby">제작자: 감현승</p>
-            </div>
-
+        <div class="row align-items-center">
             <div class="col">
+                <!-- 화면 제목 -->
+                <div id="div3">
+                    <div id="div1_title" class="d-flex justify-content-center">
+                        <div class="p-2">
+                            <hr class="line_tg1" />
+                            <div class="text_container">
+                                <p class="text1 lh-1 fw-bold fs-1 text-start">CODE HOWS</p>
+                                <p class="text2 lh-1 fw-bold fs-1 text-center">Mini Project</p>
+                            </div>
+                            <hr class="line_tg2" />
+                            <p class="lh fw-bold fs-5 text-start madeby">제작자: 감현승</p>
+                        </div>
+                    </div>
+                </div>
 
-            </div>
+                <!-- 화면 제목 -->
+                <div id="div4">
+                    <div class="d-flex justify-content-around">
+                        <div class="p-2">
+                            <div class="p-2">
+                                <hr class="line_tg1 shadow" />
 
-            <!-- 로그인한 회원 정보 (로그인 후) -->
-            <div class="col">
-                <div class="user_info" id="loginuser" style="width: 18rem;">
+                                <p class="text1 lh-1 fw-bold fs-1 text-start">CODE HOWS</p>
+                                <p class="text2 lh-1 fw-bold fs-1 text-center">Mini Project</p>
 
+                                <hr class="line_tg2 shadow" />
+                                <p class="lh fw-bold fs-5 text-start madeby">제작자: 감현승</p>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <div class="user_info text-center" id="loginuser"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -180,17 +220,21 @@
         // (세션)저장소에서 토큰을 읽어봄
         // 이유: 로그인인지 로그아웃인지 확인하기 위해서 
         let token = sessionStorage.getItem('token');
-        console.log("토큰",token);
+        console.log("토큰", token);
 
         if (token === null) {
             //과거에 로그인 한 적이 없음
             div1.style.display = "block";
             div2.style.display = "none";
+            div3.style.display = "block";
+            div4.style.display = "none";
 
         } else {
             //과거에 로그인 한 적이 있음
             div1.style.display = "none";
             div2.style.display = "block";
+            div3.style.display = "none";
+            div4.style.display = "block";
 
             // // 로그인한 유저 이름
             async function loginName() {
@@ -204,26 +248,52 @@
                 let login_info = data.result;
                 console.log('로그인한 유저이름', login_info.name);
 
-                loginuser.innerHTML = `<div class="card shadow"><div class="card-body">
-                <h5 class="card-title">${login_info.name}님</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">환영합니다.</h6>
-                <p class="card-text"></p>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                      <a href="logout.html" class="card-link">로그아웃</a>
-                  </li>
-                  <li class="list-group-item">
-                      <a href="updatepw.html" class="card-link">암호변경</a>
-                  </li>
-                  <li class="list-group-item">
-                      <a href="update.html" class="card-link">회원정보 변경</a>
-                  </li>
-                </ul>
-              </div></div>`;
-
+                loginuser.innerHTML += 
+                `<div class="card shadow">` +
+                    `<div class="card-body">` + 
+                        `<h5 class="card-title">${login_info.name}님</h5>` + 
+                        `<h6 class="card-subtitle mb-2 text-body-secondary">환영합니다.</h6>` +
+                        ` <p class="card-text"></p>`+
+                        `<ul class="list-group list-group-flush">` +
+                            `<li class="list-group-item">` +
+                                `<a href=# onclick="logoutAction()" class="card-link">로그아웃</a>` +
+                            `</li>` +
+                            `<li class="list-group-item">` + 
+                                `<a href="updatepw.html" class="card-link">암호변경</a>` +
+                            `</li>` +
+                            `<li class="list-group-item">` +
+                                `<a href="update.html" class="card-link">회원정보 변경</a>` +
+                            `</li>` +
+                          `</ul>` +
+                    `</div>` +
+                `</div>`;    
                 //  loginuser.value = login_info.name;
             }
             loginName();
+        }
+
+
+        async function logoutAction() {
+            Swal.fire({
+                text: "로그아웃을 하시겠습니까?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "예",
+                cancelButtonText: "아니오"
+
+                // result를 async()로 감싸서 await를 사용할 수 있도록 설정
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+
+                    sessionStorage.removeItem('token');
+                    window.location.href = "home.html";
+                }
+                else {
+                    window.location.href = "home.html";
+                }
+            });
         }
 
         // console.log(window); // script에서 사용할 수 있는 명령어
