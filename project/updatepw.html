@@ -110,53 +110,55 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // function joinAction() {
-        //     if(uid.value.length < 1) {
-        //         alert('아이디를 입력해주세요');
-        //         uid.focus();
-        //         return false;
-        //     }
 
-        //     // ** 서버에서 현재 암호를 가져와 비교할 필요 있음 **
-        //     if(upw1.value.length < 1) {
-        //         alert('현재 암호를 입력해주세요');
-        //         upw1.focus();
-        //         return false;
-        //     }
-
-        //     if(upw2.value !== upw1.value || upw2.value === '') {
-        //         alert('현재 암호와 현재 암호 확인이 일치하지 않습니다.');
-        //         upw2.focus();
-        //         return false;
-        //     }
-
-        //     if(chpw.value.length < 1) {
-        //         alert('변경할 암호를 입력해주세요');
-        //         chpw.focus();
-        //         return false;
-        //     }
-        //     alert('암호가 변경되었습니다.')
-        // }
 
         async function updatepwAction() {
 
-            let token = sessionStorage.getItem('token');
-            const url = `http://ihongss.com:13000/api/member/updatepw.json`;
-            const headers = { "auth": token, "Content-Type": "application/json" };
-            const body = {
-                password: upw1.value,
-                password1: chpw.value
-            };
-            const { data } = await axios.put(url, body, { headers });
-
-            if (data.status === 200) {
-                alert('암호를 변경하였습니다.');
-
-                window.location.href = "home.html";
-
-            } else {
-                alert('암호 변경에 실패하였습니다.')
+            if (uid.value.length < 1) {
+                alert('아이디를 입력해주세요');
+                uid.focus();
+                return false;
             }
+
+            // ** 서버에서 현재 암호를 가져와 비교할 필요 있음 **
+            else if (upw1.value.length < 1) {
+                alert('현재 암호를 입력해주세요');
+                upw1.focus();
+                return false;
+            }
+
+            else if (upw2.value !== upw1.value || upw2.value === '') {
+                alert('현재 암호와 현재 암호 확인이 일치하지 않습니다.');
+                upw2.focus();
+                return false;
+            }
+
+            else if (chpw.value.length < 1) {
+                alert('변경할 암호를 입력해주세요');
+                chpw.focus();
+                return false;
+            }
+            else {
+                let token = sessionStorage.getItem('token');
+                const url = `http://ihongss.com:13000/api/member/updatepw.json`;
+                const headers = { "auth": token, "Content-Type": "application/json" };
+                const body = {
+                    password: upw1.value,
+                    password1: chpw.value
+                };
+                const { data } = await axios.put(url, body, { headers });
+
+                if (data.status === 200) {
+                    alert('암호를 변경하였습니다.');
+
+                    window.location.href = "home.html";
+
+                } else {
+                    alert('암호 변경에 실패하였습니다.')
+                }
+            }
+
+
 
 
         }

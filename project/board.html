@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .background {
             position: relative;
@@ -55,32 +56,56 @@
 
         <div class="board_container shadow">
 
-            <!-- 페이지 제목 -->
-            <div class="margin">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">홈으로</a>
-                      </li>
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-disabled="true">게시판</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="memberlist.html">회원목록</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.html">쇼핑몰</a>
-                      </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="item.html">물품관리</a>
-                    </li>
-                  </ul>
+            <!-- 페이지 메뉴 -->
+            <div id="div1">
+                <div class="margin">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">홈으로</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-disabled="true">게시판</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">쇼핑몰</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div id="div2">
+                <div class="margin">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">홈으로</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-disabled="true">게시판</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memberlist.html">회원목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">쇼핑몰</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="item.html">물품관리</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!--버튼 및 검색란-->
             <div class="row g-3 d-flex justify-content-between margin">
                 <div class="col-auto">
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a href="boardwrite.html"><button type="button" class="btn btn-warning">글쓰기</button></a>
+                        <a href="boardwrite.html">
+                            <button type="button" class="btn btn-warning">
+                                <span class="bi bi-pencil-fill"></span>
+                                글쓰기
+                            </button>
+                        </a>
                     </div>
                 </div>
 
@@ -93,7 +118,9 @@
                                 <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary">검색</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="bi bi-search"></span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -137,6 +164,21 @@
         //http://127.0.0.1:5500/class/board10.html 
         //http://127.0.0.1:5500/class/board10.html?page=1&text=     => 페이지네이션 후
 
+        let token = sessionStorage.getItem('token');
+        console.log("토큰", token);
+
+        if (token === null) {
+            //과거에 로그인 한 적이 없음
+            div1.style.display = "block";
+            div2.style.display = "none";
+
+        } else {
+            //과거에 로그인 한 적이 있음
+            div1.style.display = "none";
+            div2.style.display = "block";
+        }
+
+
 
         // 페이지네이션 
         const urlPath = new URL(window.location.href)
@@ -175,6 +217,16 @@
 
             for (let tmp of rows) {
 
+                // 문자열 길이 초과 시 ...으로 치환
+                if(tmp.writer.length > 4 ) {
+                        console.log("작성자 이름 너무 길어 => ",tmp.writer);
+                        tmp.writer = tmp.writer.slice(tmp.writer, 4) + "...";
+                    } else if (tmp.title.length > 10) {
+                        console.log("제목 너무 길어 => ",tmp.title);
+                        tmp.title = tmp.title.slice(tmp.writer, 10) + "...";
+                }
+
+
                 // 반복문 내 댓글 개수를 불러오는 코드 생성 
                 // 반복문으로 data의 rows 내의 게시글 id값들을 차례대로 불러와 그대로 댓글 갯수 정보를 확인하는 url에 삽입.
 
@@ -184,12 +236,13 @@
                 console.log("댓글 개수", data.total);
 
                 if (data.total === 0) {
+
                     //tbody에 추가
                     tbody.innerHTML +=
                         `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
                         `<td>${tmp._id}</td>` +
-                        `<td>${tmp.title.substr(0, 10)}</td>` +
-                        `<td>${tmp.writer.substr(0, 4)}</td>` +
+                        `<td>${tmp.title}</td>` +
+                        `<td>${tmp.writer}</td>` +
                         `<td>${tmp.hit}</td>` +
                         `<td>${tmp.regdate2}</td>` +
                         `</tr>`;
@@ -198,8 +251,8 @@
                     tbody.innerHTML +=
                         `<tr style='cursor:pointer;' onclick="nextPage(${tmp._id})">` +
                         `<td>${tmp._id}</td>` +
-                        `<td>${tmp.title.substr(0, 10)} [${data.total}]</td>` +
-                        `<td>${tmp.writer.substr(0, 4)}</td>` +
+                        `<td>${tmp.title} [${data.total}]</td>` +
+                        `<td>${tmp.writer}</td>` +
                         `<td>${tmp.hit}</td>` +
                         `<td>${tmp.regdate2}</td>` +
                         `</tr>`;
