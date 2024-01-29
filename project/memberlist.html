@@ -59,20 +59,20 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" href="home.html">홈으로</a>
-                      </li>
+                    </li>
                     <li class="nav-item">
-                      <a class="nav-link"  href="board.html" >게시판</a>
+                        <a class="nav-link" href="board.html">게시판</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-disabled="true">회원목록</a>
-                      </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="shop.html">쇼핑몰</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="item.html">물품관리</a>
+                        <a class="nav-link" href="shop.html">쇼핑몰</a>
                     </li>
-                  </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="item.html">물품관리</a>
+                    </li>
+                </ul>
             </div>
 
             <!--검색란-->
@@ -86,7 +86,8 @@
                                 <input type="text" name="text" id="id" class="form-control" placeholder="검색어" />
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary"><span class="bi bi-search"></span></button>
+                                <button type="submit" class="btn btn-primary"><span
+                                        class="bi bi-search"></span></button>
                             </div>
                         </div>
                     </form>
@@ -143,25 +144,6 @@
         // console.log(window); // script에서 사용할 수 있는 명령어
 
 
-        // // 로그인한 유저 이름
-        async function loginName() {
-            let token = sessionStorage.getItem('token');
-            console.log("token");
-
-            const url = `http://ihongss.com:13000/api/member/selectone.json`;
-            const headers = { "auth": token, "Content-Type": "application/json" };
-            const { data } = await axios.get(url, { headers });
-
-            let login_info = data.result;
-            console.log('로그인한 유저이름', login_info.name);
-
-            loginuser.innerHTML = `<p>${login_info.name}님 환영합니다.</p>`;
-            //  loginuser.value = login_info.name;
-        }
-        loginName();
-
-
-
         // 회원목록 불러오는 함수(memberlist)
         async function memberlist() {
             // 데이터를 받아올 주소
@@ -182,9 +164,18 @@
 
                 // arr 요소들을 tmp에 할당
                 for (let tmp of arr) {
+
+                    // 문자열 길이 초과 시 ...으로 치환
+                    if (tmp._id.length > 5) {
+                        console.log("id가 너무 길어 => ",tmp._id);
+                        tmp._id = tmp._id.slice(tmp._id, 5) + "...";
+
+                    } 
+
+
                     tbody.innerHTML +=
                         `<tr>` +
-                        `<td>${tmp._id.substr(0, 5)}</td>` +
+                        `<td>${tmp._id}</td>` +
                         `<td>${tmp.name.substr(0, 3)}</td>` +
                         `<td>${tmp.age}</td>` +
                         `<td>${tmp.email}</td>` +

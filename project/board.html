@@ -219,10 +219,10 @@
 
                 // 문자열 길이 초과 시 ...으로 치환
                 if(tmp.writer.length > 4 ) {
-                        console.log("작성자 이름 너무 길어 => ",tmp.writer);
+                        // console.log("작성자 이름 너무 길어 => ",tmp.writer);
                         tmp.writer = tmp.writer.slice(tmp.writer, 4) + "...";
                     } else if (tmp.title.length > 10) {
-                        console.log("제목 너무 길어 => ",tmp.title);
+                        // console.log("제목 너무 길어 => ",tmp.title);
                         tmp.title = tmp.title.slice(tmp.writer, 10) + "...";
                 }
 
